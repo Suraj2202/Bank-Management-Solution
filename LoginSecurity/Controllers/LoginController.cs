@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LoginSecurity.Models.Domains;
+using LoginSecurity.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace LoginSecurity.Controllers
 {
@@ -12,36 +11,36 @@ namespace LoginSecurity.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
-        // GET: api/<LoginController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IUserRepository userRepository;
+
+        public LoginController(IUserRepository userRepository)
         {
-            return new string[] { "value1", "value2" };
+            this.userRepository = userRepository;
         }
 
-        // GET api/<LoginController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        //Getting User Details
+
+        [HttpGet("{uname}")]
+        public UserDetail Get(string uname)
         {
-            return "value";
+            return userRepository.GetUser(uname);
         }
 
-        // POST api/<LoginController>
+        //Validate User
+
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] UserDetail value)
         {
+            int role = await userRepository.ValidateUserCredAsync(value.UserName, value.Password);
+
+            if (role == 0)
+                return Ok("User");
+            else if (role == 1)
+                return Ok("Admin");
+            else
+                return NotFound("User Not Found");
+            
         }
 
-        // PUT api/<LoginController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<LoginController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
