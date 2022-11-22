@@ -1,0 +1,27 @@
+﻿<Application x:Class="BankManagement_WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BankManagement_WPF"
+             StartupUri="View/LoginWindow.xaml">
+    <Application.Resources>
+
+        <SolidColorBrush x:Key="generalBackround" Color="MidnightBlue"/>
+        <SolidColorBrush x:Key="generalForeground" Color="White"/>
+        <SolidColorBrush x:Key="generalseparator" Color="Orange"/>
+
+        <Style TargetType="Button" x:Key="generalButtonStyle">
+            <Setter Property="Background" Value="{StaticResource generalBackround}"/>
+            <Setter Property="Foreground" Value="{StaticResource generalForeground}"/>
+        </Style>
+
+        <Style TargetType="Separator" x:Key="generalSeparatorStyle">
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="Background" Value="{StaticResource generalseparator}"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="generalLabelStyle">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="Foreground" Value="DarkOrange"/>
+        </Style>
+    </Application.Resources>
+</Application>
