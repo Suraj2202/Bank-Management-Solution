@@ -15,26 +15,18 @@ using System.Windows.Shapes;
 namespace BankManagement_WPF.View
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for SignupWindow.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class SignupWindow : Window
     {
-        public LoginWindow()
+        public SignupWindow()
         {
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            DashboardWindow dashboard = new DashboardWindow();
-            dashboard.Show();
-            this.Close();
-        }
-
         private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            SignupWindow signupWindow = new SignupWindow();
-            signupWindow.ShowDialog();
+            this.Close();
         }
     }
 }

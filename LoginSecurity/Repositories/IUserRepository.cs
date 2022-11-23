@@ -6,6 +6,6 @@ namespace LoginSecurity.Repositories
     public interface IUserRepository
     {
         Task<int> ValidateUserCredAsync(string userName, string password);
-        UserDetail GetUser(string userName);
+        Task<UserDetail> GetUserAsync(string userName);
     }
 }

@@ -23,5 +23,24 @@
             <Setter Property="FontSize" Value="10"/>
             <Setter Property="Foreground" Value="DarkOrange"/>
         </Style>
+
+        <Style TargetType="Label" x:Key="HeadingLabelStyle">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="Orange"/>
+            <Setter Property="FontFamily" Value="Lucida Sans" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <Style TargetType="Button" x:Key="dashboardButtonStyle">
+            <Setter Property="Background" Value="Orange"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Width" Value="auto"/>
+            <Setter Property="Height" Value="auto"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
     </Application.Resources>
 </Application>

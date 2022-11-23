@@ -1,0 +1,59 @@
+﻿<Window x:Class="BankManagement_WPF.View.DashboardWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagement_WPF.View"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
+        mc:Ignorable="d"
+        Background="LightCyan"
+        Title="Dashboard" Height="450" Width="800">
+
+    <Window.Resources>
+        <vm:UserDetailVM x:Key="userDetailVm"/>
+    </Window.Resources>
+
+
+    <StackPanel DataContext="{StaticResource userDetailVm}"
+                HorizontalAlignment="Center">
+
+        <Label Content="Welcome To Personal Loan Bank"
+                Style="{StaticResource HeadingLabelStyle}"/>
+        <Image
+        Margin="5,0" 
+        Source="/Images/banner.jpg"/>
+
+        <Grid
+            Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button 
+                Content="User Detail"
+                Style="{StaticResource dashboardButtonStyle}"
+                Foreground="Orange"
+                Background="LightCyan"
+                FontWeight="Bold"/>
+            <Button 
+                Grid.Column="1"
+                Content="Apply Loan"
+                Click="ApplyLoanButton_Click"
+                Style="{StaticResource dashboardButtonStyle}"/>
+            <Button 
+                Grid.Column="2"
+                Content="Previous Loan"
+                Click="PreviousLoanButton_Click"
+                Style="{StaticResource dashboardButtonStyle}"/>
+            <Button 
+                Grid.Column="3"
+                Content="Update Details"
+                Click="UpdateDetailsButton_Click"
+                Style="{StaticResource dashboardButtonStyle}"/>
+        </Grid>
+        
+    </StackPanel>
+</Window>

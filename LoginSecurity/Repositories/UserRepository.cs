@@ -1,6 +1,7 @@
 ﻿using LoginSecurity.Data;
 using LoginSecurity.JwtToken;
 using LoginSecurity.Models.Domains;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,9 +46,9 @@ namespace LoginSecurity.Repositories
             else
                 return 2;
         }
-        public UserDetail GetUser(string userName)
+        public async Task<UserDetail> GetUserAsync(string userName)
         {
-           return bankManagementDbContext.UserDetails?.Where(x => x.UserName == userName).FirstOrDefault();
+           return await bankManagementDbContext.UserDetails?.FirstOrDefaultAsync(x => x.UserName == userName);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using LoginSecurity.Models.Domains;
+﻿using AutoMapper;
+using LoginSecurity.Models.Domains;
+using LoginSecurity.Models.DTO;
 using LoginSecurity.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,24 +14,28 @@ namespace LoginSecurity.Controllers
     public class LoginController : ControllerBase
     {
         private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
 
-        public LoginController(IUserRepository userRepository)
+        public LoginController(IUserRepository userRepository, IMapper mapper)
         {
             this.userRepository = userRepository;
+            this.mapper = mapper;
         }
 
         //Getting User Details
 
         [HttpGet("{uname}")]
-        public UserDetail Get(string uname)
+        public async Task<UserDetailDTO> Get(string uname)
         {
-            return userRepository.GetUser(uname);
+            UserDetail userDetail = await userRepository.GetUserAsync(uname);
+            UserDetailDTO userDetailDTO = mapper.Map<UserDetailDTO>(userDetail);
+            return userDetailDTO;
         }
 
         //Validate User
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] UserDetail value)
+        public async Task<IActionResult> Post([FromBody] LoginDetailDTO value)
         {
             int role = await userRepository.ValidateUserCredAsync(value.UserName, value.Password);
 
