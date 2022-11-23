@@ -17,7 +17,7 @@
     <StackPanel DataContext="{StaticResource userDetailVm}"
                 HorizontalAlignment="Center">
 
-        <Label Content="Welcome To Personal Loan Bank"
+        <Label Content="Welcome To Self Loan Bank"
                 Style="{StaticResource HeadingLabelStyle}"/>
         <Image
         Margin="5,0" 

@@ -4,9 +4,70 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
+        Background="LightCyan"
         mc:Ignorable="d"
-        Title="ApplyLoanWindow" Height="450" Width="800">
-    <Grid>
+        Title="Apply Loan" Height="450" Width="400">
+    <StackPanel
+        HorizontalAlignment="Center">
         
-    </Grid>
+        <Label Content="Self Loan Bank"
+                Style="{StaticResource HeadingLabelStyle}"/>
+        <Image
+        Margin="5,0" 
+        Source="/Images/banner.jpg"/>
+
+        <Button
+            Content="Previous Applied Loan"
+            HorizontalAlignment="Right"
+            Margin="0,5,15,0"
+            BorderThickness="3"
+            BorderBrush="GreenYellow"
+            Background="LightCyan"
+            Foreground="Purple"
+            FontWeight="SemiBold"
+            FontSize="14"/>
+
+        <StackPanel
+            Margin="10,10,0,0"
+            HorizontalAlignment="Center">
+
+            <Label
+            Content="Loan Type"
+            Style ="{StaticResource generalLabelStyle}"/>
+            <ComboBox>
+                <ComboBoxItem>
+                    Personal
+                </ComboBoxItem>
+                <ComboBoxItem
+                IsSelected="True">
+                    Home
+                </ComboBoxItem>
+            </ComboBox>
+
+            <Label
+            Content="Loan Amount"
+            Style ="{StaticResource generalLabelStyle}"/>
+            <TextBox/>
+
+            <Label
+            Content="Loan Date"
+            Style ="{StaticResource generalLabelStyle}"/>
+            <DatePicker/>
+            
+            <Label
+            Content="Rate Of Interest"
+            Style ="{StaticResource generalLabelStyle}"/>
+            <TextBox/>
+
+            <Label
+            Content="Duration OF Loan"
+            Style ="{StaticResource generalLabelStyle}"/>
+            <TextBox/>
+
+            <Button
+                Content="Apply"
+                Margin="10"
+                Style="{StaticResource generalButtonStyle}"/>
+        </StackPanel>
+    </StackPanel>
 </Window>

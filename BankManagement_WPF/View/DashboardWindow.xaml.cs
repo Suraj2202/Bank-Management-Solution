@@ -36,11 +36,11 @@ namespace BankManagement_WPF.View
         private void ApplyLoanButton_Click(object sender, RoutedEventArgs e)
         {
             new ApplyLoanWindow().Show();
-            this.Close();
+            this.Hide();
         }
         private void UpdateDetailsButton_Click(object sender, RoutedEventArgs e)
         {
-            new 
+            new UpdateUserDetailWindow().ShowDialog();
         }
         private void PreviousLoanButton_Click(object sender, RoutedEventArgs e)
         {
