@@ -15,37 +15,20 @@ using System.Windows.Shapes;
 namespace BankManagement_WPF.View
 {
     /// <summary>
-    /// Interaction logic for DashboardWindow.xaml
+    /// Interaction logic for ApplyLoanWindow.xaml
     /// </summary>
-    public partial class DashboardWindow : Window
+    public partial class ApplyLoanWindow : Window
     {
-        public DashboardWindow()
+        public ApplyLoanWindow()
         {
             InitializeComponent();
-
         }
-
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             //do my stuff before closing
-            new LoginWindow().Show();
+            new DashboardWindow().Show();
             base.OnClosing(e);
         }
-
-
-        private void ApplyLoanButton_Click(object sender, RoutedEventArgs e)
-        {
-            new ApplyLoanWindow().Show();
-            this.Close();
-        }
-        private void UpdateDetailsButton_Click(object sender, RoutedEventArgs e)
-        {
-            new 
-        }
-        private void PreviousLoanButton_Click(object sender, RoutedEventArgs e)
-        {
-            new PreviousAppliedLoansWindow().ShowDialog();
-        }
-        
     }
+
 }
