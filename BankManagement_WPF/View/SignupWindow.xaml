@@ -74,4 +74,5 @@
             FontWeight="Bold"
             Click="CreateAccountButton_Click"/>
     </StackPanel>
+
 </Window>

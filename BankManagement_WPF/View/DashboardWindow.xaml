@@ -54,6 +54,134 @@
                 Click="UpdateDetailsButton_Click"
                 Style="{StaticResource dashboardButtonStyle}"/>
         </Grid>
-        
+
+        <Grid
+            HorizontalAlignment="Center"
+            Margin="0,20,0,0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"                
+                Content="Account Type"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="3"                
+                Content="Saving"
+                Style="{StaticResource userInfoLabel}"/>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"                
+                Content="Name"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="1"                
+                Content="User"
+                Style="{StaticResource userInfoLabel}"/>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"                
+                Content="Address"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="1"                
+                Content="Malkera New Colony, DC 4"
+                Style="{StaticResource userInfoLabel}"/>
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="0"                
+                Content="State"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="1"                
+                Content="JH"
+                Style="{StaticResource userInfoLabel}"/>
+
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"                
+                Content="Country"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="4"
+                Grid.Column="1"                
+                Content="India"
+                Style="{StaticResource userInfoLabel}"/>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="2"                
+                Content="Email Id"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="3"                
+                Content="test@test.test"
+                Style="{StaticResource userInfoLabel}"/>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="2"                
+                Content="PAN No."
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="3"                
+                Content="123567890"
+                Style="{StaticResource userInfoLabel}"/>
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="2"                
+                Content="Contact No."
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="3"
+                Grid.Column="3"                
+                Content="9818280766"
+                Style="{StaticResource userInfoLabel}"/>
+
+            <Label
+                Grid.Row="4"
+                Grid.Column="2"                
+                Content="D.O.B"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="4"
+                Grid.Column="3"                
+                Content="08-12-1997"
+                Style="{StaticResource userInfoLabel}"/>
+
+
+        </Grid>
     </StackPanel>
 </Window>

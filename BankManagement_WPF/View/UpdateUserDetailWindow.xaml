@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
         mc:Ignorable="d"
-        Title="UpdateUserDetailWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Update User Detail" Height="600" Width="400">
+    <StackPanel
+        Margin="10">
+        <Label
+            Content="User Name"
+            Foreground="Red"/>
+        <Separator
+            Background="Black"/>
+        <Label
+            Content="Name"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <TextBox/>
+        <Label
+            Content="Password"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <TextBox/>
+        <Label
+            Content="Address"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <TextBox/>
+        <Label
+            Content="State"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <TextBox/>
+        <Label
+            Content="Country"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <TextBox/>
+        <Label
+            Content="Email ID"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <TextBox/>
+        <Label
+            Content="PAN Number"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <TextBox/>
+        <Label
+            Content="Contact Number"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <TextBox/>
+        <Label
+            Content="Date Of Birth"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <DatePicker/>
+        <Label
+            Content="Account Type"
+            Style ="{StaticResource generalLabelStyle}"/>
+        <Label
+            Content="Saving"
+            Style="{StaticResource infoLabel}"/>
+
+        <Button
+            Content="| Update Details |"
+            Margin="5,10"
+            Width="auto"
+            FontSize="20"
+            Height="50"
+            BorderThickness="0"
+            Background="LightGoldenrodYellow"
+            Foreground="DarkBlue"
+            FontWeight="Bold"
+            Click="UpdateAccountButton_Click"/>
+    </StackPanel>
+
 </Window>

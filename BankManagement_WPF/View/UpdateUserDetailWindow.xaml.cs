@@ -23,5 +23,10 @@ namespace BankManagement_WPF.View
         {
             InitializeComponent();
         }
+
+        private void UpdateAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -5,8 +5,68 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
         mc:Ignorable="d"
-        Title="PreviousAppliedLoansWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Previous Applied Loans" Height="450" Width="800">
+    <StackPanel>
+
+        <Label Content="Self Loan Bank"
+                Style="{StaticResource HeadingLabelStyle}"/>
+        <Image
+        Margin="5,0" 
+        Source="/Images/banner.jpg"/>
+
+        <Label
+            Margin="5"
+            Content="UserName"
+            Style="{StaticResource userInfoLabel}"
+            FontSize="16"/>
+
+        <Grid
+            Margin="10,0">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="0"
+                Content="Loan Id"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Column="1"
+                Content="Type"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Column="2"
+                Content="Amount"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Column="3"
+                Content="Date"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Column="4"
+                Content="Rate Of Interest"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Column="5"
+                Content="Loan Duration"
+                Style="{StaticResource infoLabel}"/>
+
+        </Grid>
+        <Separator
+            Margin="0,0,10,0"
+            Style="{StaticResource generalSeparatorStyle}"/>
+
+    </StackPanel>
 </Window>
