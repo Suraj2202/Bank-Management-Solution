@@ -7,5 +7,8 @@ namespace LoginSecurity.Repositories
     {
         Task<int> ValidateUserCredAsync(string userName, string password);
         Task<UserDetail> GetUserAsync(string userName);
+        Task<bool> SaveUserDeatilAsync(UserDetail userDetail);
+        Task<bool> EndSessionAsync(string userName);
+        Task<bool> ValidateUserSessionAsync(string userName);
     }
 }

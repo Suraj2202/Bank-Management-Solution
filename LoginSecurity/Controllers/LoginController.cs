@@ -29,6 +29,10 @@ namespace LoginSecurity.Controllers
         {
             UserDetail userDetail = await userRepository.GetUserAsync(uname);
             UserDetailDTO userDetailDTO = mapper.Map<UserDetailDTO>(userDetail);
+
+            if(userDetailDTO != null)
+                userDetailDTO.Token = null;
+
             return userDetailDTO;
         }
 

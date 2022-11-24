@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BankManagement_WPF", "BankM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiServices", "ApiServices", "{85E62BBC-C631-476E-99DD-507B485983E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginSecurity", "LoginSecurity\LoginSecurity.csproj", "{341FFD88-DCAE-4811-91F8-ECC07C9A231B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoginSecurity", "LoginSecurity\LoginSecurity.csproj", "{341FFD88-DCAE-4811-91F8-ECC07C9A231B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoanApply", "LoanApply\LoanApply.csproj", "{B3A87BD2-85FA-42C7-AEF7-7DDF301B0EB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,12 +25,17 @@ Global
 		{341FFD88-DCAE-4811-91F8-ECC07C9A231B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{341FFD88-DCAE-4811-91F8-ECC07C9A231B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{341FFD88-DCAE-4811-91F8-ECC07C9A231B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A87BD2-85FA-42C7-AEF7-7DDF301B0EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A87BD2-85FA-42C7-AEF7-7DDF301B0EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A87BD2-85FA-42C7-AEF7-7DDF301B0EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A87BD2-85FA-42C7-AEF7-7DDF301B0EB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{341FFD88-DCAE-4811-91F8-ECC07C9A231B} = {85E62BBC-C631-476E-99DD-507B485983E5}
+		{B3A87BD2-85FA-42C7-AEF7-7DDF301B0EB5} = {85E62BBC-C631-476E-99DD-507B485983E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13ABE5D7-430A-4AEE-92BC-078A994DE20D}

@@ -1,83 +1,42 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using LoginSecurity.Models.Domains;
+using LoginSecurity.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace LoginSecurity.Controllers
 {
-    public class SignupController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SignupController : ControllerBase
     {
-        // GET: SignupController
-        public ActionResult Index()
+        private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
+
+        public SignupController(IUserRepository userRepository, IMapper mapper)
         {
-            return View();
+            this.userRepository = userRepository;
+            this.mapper = mapper;
         }
 
-        // GET: SignupController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: SignupController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: SignupController/Create
+        // POST api/<SignupController>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Post([FromBody] UserDetail value)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            bool response = await userRepository.SaveUserDeatilAsync(value);
+            
+            if(response)
+                return Ok("Added Succesfully");
+            
+            return BadRequest("User Already Exists");
+            
         }
 
-        // GET: SignupController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: SignupController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: SignupController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: SignupController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

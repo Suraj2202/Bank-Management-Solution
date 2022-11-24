@@ -1,47 +1,47 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using LoginSecurity.Repositories;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace LoginSecurity.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
     public class SessionController : ControllerBase
     {
-        // GET: api/<SessionController>
+        private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
+
+        public SessionController(IUserRepository userRepository, IMapper mapper)
+        {
+            this.userRepository = userRepository;
+            this.mapper = mapper;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("api/Validate/{uname}")]
+        public async Task<bool> Get(string uname)
         {
-            return new string[] { "value1", "value2" };
+            bool sessionValidate = await userRepository.ValidateUserSessionAsync(uname);
+            return sessionValidate;
         }
 
-        // GET api/<SessionController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
-        // POST api/<SessionController>
+        [Route("api/Logout")]
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> Post([FromBody] string uname)
         {
-        }
+            bool response = await userRepository.EndSessionAsync(uname);
 
-        // PUT api/<SessionController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            if (response)
+                return Ok("Logot Succesfully");
 
-        // DELETE api/<SessionController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return BadRequest("Bad Request");
+
         }
     }
 }

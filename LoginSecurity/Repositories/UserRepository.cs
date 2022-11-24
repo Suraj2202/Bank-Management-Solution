@@ -50,5 +50,41 @@ namespace LoginSecurity.Repositories
         {
            return await bankManagementDbContext.UserDetails?.FirstOrDefaultAsync(x => x.UserName == userName);
         }
+
+        public async Task<bool> SaveUserDeatilAsync(UserDetail userDetail)
+        {
+            try
+            {
+                await bankManagementDbContext.UserDetails.AddAsync(userDetail);
+                await bankManagementDbContext.SaveChangesAsync();
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> EndSessionAsync(string userName)
+        {
+            UserDetail userDetail = await GetUserAsync(userName);
+            if(userDetail != null)
+            {
+                userDetail.Token = "logout";
+                await bankManagementDbContext.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> ValidateUserSessionAsync(string userName)
+        {
+            UserDetail userDetail = await GetUserAsync(userName);
+            if (userDetail != null)
+            {
+                return _tokenManager.ValidateToken(userDetail.Token);
+            }
+            return false;
+        }
     }
 }
