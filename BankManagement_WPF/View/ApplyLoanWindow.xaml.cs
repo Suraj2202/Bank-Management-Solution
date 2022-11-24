@@ -23,11 +23,10 @@ namespace BankManagement_WPF.View
         {
             InitializeComponent();
         }
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        
+        private void PreviousAppliedButton_Click(object sender, RoutedEventArgs e)
         {
-            //do my stuff before closing
-            new DashboardWindow().Show();
-            base.OnClosing(e);
+            new PreviousAppliedLoansWindow().Show();
         }
     }
 

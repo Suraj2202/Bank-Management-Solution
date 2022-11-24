@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankManagement_WPF.View.Admin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,19 @@ namespace BankManagement_WPF.View
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
+            //For User Login
+
             DashboardWindow dashboard = new DashboardWindow();
             dashboard.Show();
             this.Close();
+
+            /*
+                        //For Admin Login
+
+                        AdminDashboardWindow dashboard = new AdminDashboardWindow();
+                        dashboard.Show();
+                        this.Close();
+            */
         }
 
         private void CreateAccountButton_Click(object sender, RoutedEventArgs e)

@@ -26,6 +26,9 @@
             Width="200"
             Height="30"/>
         
+        <Separator
+            Style="{StaticResource generalSeparatorStyle}"/>
+        
         <Grid
             Margin="5,10,0,0">
 
