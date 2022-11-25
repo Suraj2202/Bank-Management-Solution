@@ -1,5 +1,7 @@
 ﻿using BankManagement_WPF.Model;
+using BankManagement_WPF.Validations;
 using BankManagement_WPF.ViewModel.Commands;
+using BankManagement_WPF.ViewModel.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -120,6 +122,9 @@ namespace BankManagement_WPF.ViewModel
             }
         }
 
+
+        public string EndDate { get; set; }
+
         private string dob;
 
         public string DOB
@@ -144,16 +149,75 @@ namespace BankManagement_WPF.ViewModel
             }
         }
 
+        private string warning;
+
+        public string Warning
+        {
+            get { return warning; }
+            set { warning = value; OnPropertyChanged("Warning"); }
+        }
+
 
         public CreateAccountCommand CreateAccountCommand { get; set; }
+        
+        TextBlockValidation textBlockValidation;
 
         public SignupVM()
         {
+            EndDate = DateTime.Now.ToString("dd/MM/yyyy");
             CreateAccountCommand = new CreateAccountCommand(this);
+            textBlockValidation = new TextBlockValidation();
         }
 
-        public void CreateNewAccount()
+        public async void CreateNewAccount()
         {
+            //Validation:
+
+            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(PassWord) || string.IsNullOrEmpty(EmailId) || string.IsNullOrEmpty(PAN) || string.IsNullOrEmpty(ContactNo) || string.IsNullOrEmpty(DOB))
+            {
+                Warning = "All Fields are mandatory";
+                return;
+            }
+
+            if(textBlockValidation.UserNameValidation(UserName))
+            {
+                Warning = " 7 < UserName > 21 and, must not have special character except _";
+                return;
+            }
+
+            if(!textBlockValidation.PasswordValidation(PassWord))
+            {
+                Warning = "Password must be inbetween 8-20 and must have 1 Caps, 1 Small and 1 Special character";
+                return;
+            }
+
+            if(!textBlockValidation.EmailIDValidation(EmailId))
+            {
+                Warning = "Invalid Email ID";
+                return;
+            }
+
+            if (!textBlockValidation.PANandContactNoValidation(PAN))
+            {
+                Warning = "Invalid PAN Number, 1st digit should not be 0 and must have 10 digits.";
+                return;
+            }
+
+            if (!textBlockValidation.PANandContactNoValidation(ContactNo))
+            {
+                Warning = "Invalid Contact Number, 1st digit should not be 0 and must have 10 digits.";
+                return;
+            }
+
+            if(textBlockValidation.FutureDateValidation(DOB))
+            {
+                Warning = "No Future Dates Please.";
+                return;
+            }
+
+            string[] dates= DOB.Split(" ")[0].Split("/");
+            string myDate = dates[1]+ "/" + dates[0]+ "/" + dates[2];
+
             UserDetail user = new UserDetail()
             {
                 Name = Name,
@@ -165,11 +229,24 @@ namespace BankManagement_WPF.ViewModel
                 Email = EmailId,
                 PAN = long.Parse(PAN),
                 Contact = long.Parse(contactNo),
-                DOB = DateTime.Parse(DOB),
-                AccountType = AccountType
+                DOB = DateTime.Parse(myDate),
+                AccountType = AccountType.Split(":")[1].Trim()
             };
 
-            UserDetail xyz = user;
+            string createAccountStatus = await SignupHelper.CreateAccount(user);
+
+            if (createAccountStatus == "Added Succesfully")
+            {
+                Warning = "Your Account Created Successfully";
+            }
+            else if (createAccountStatus == "User Already Exists")
+            {
+                Warning = "User Name is already taken";
+            }
+            else
+            {
+                Warning = "Something went wrong !!!";
+            }
         }
 
 

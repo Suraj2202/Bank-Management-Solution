@@ -93,15 +93,24 @@
 
             <Label
                 Grid.Row="0"
+                Grid.Column="0"                
+                Content="User Name"
+                Style="{StaticResource infoLabel}"/>
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{Binding UserName}"/>
+            <Label
+                Grid.Row="0"
                 Grid.Column="2"                
                 Content="Account Type"
                 Style="{StaticResource infoLabel}"/>
 
             <Label
                 Grid.Row="0"
-                Grid.Column="3"                
-                Content="Saving"
-                Style="{StaticResource userInfoLabel}"/>
+                Grid.Column="3"
+                Style="{Binding AccountType}"/>
 
             <Label
                 Grid.Row="1"
@@ -111,9 +120,8 @@
 
             <Label
                 Grid.Row="1"
-                Grid.Column="1"                
-                Content="User"
-                Style="{StaticResource userInfoLabel}"/>
+                Grid.Column="1"
+                Style="{Binding Name}"/>
 
             <Label
                 Grid.Row="2"
@@ -124,8 +132,7 @@
             <Label
                 Grid.Row="2"
                 Grid.Column="1"                
-                Content="Malkera New Colony, DC 4"
-                Style="{StaticResource userInfoLabel}"/>
+                Style="{Binding Address}"/>
 
             <Label
                 Grid.Row="3"
@@ -135,9 +142,8 @@
 
             <Label
                 Grid.Row="3"
-                Grid.Column="1"                
-                Content="JH"
-                Style="{StaticResource userInfoLabel}"/>
+                Grid.Column="1"        
+                Style="{Binding State}"/>
 
             <Label
                 Grid.Row="4"
@@ -147,9 +153,8 @@
 
             <Label
                 Grid.Row="4"
-                Grid.Column="1"                
-                Content="India"
-                Style="{StaticResource userInfoLabel}"/>
+                Grid.Column="1"  
+                Style="{Binding Country}"/>
 
             <Label
                 Grid.Row="1"
@@ -159,9 +164,8 @@
 
             <Label
                 Grid.Row="1"
-                Grid.Column="3"                
-                Content="test@test.test"
-                Style="{StaticResource userInfoLabel}"/>
+                Grid.Column="3"          
+                Style="{Binding EmailId}"/>
 
             <Label
                 Grid.Row="2"
@@ -171,9 +175,8 @@
 
             <Label
                 Grid.Row="2"
-                Grid.Column="3"                
-                Content="123567890"
-                Style="{StaticResource userInfoLabel}"/>
+                Grid.Column="3"    
+                Style="{Binding PAN}"/>
 
             <Label
                 Grid.Row="3"
@@ -183,9 +186,8 @@
 
             <Label
                 Grid.Row="3"
-                Grid.Column="3"                
-                Content="9818280766"
-                Style="{StaticResource userInfoLabel}"/>
+                Grid.Column="3"      
+                Style="{Binding ContactNo}"/>
 
             <Label
                 Grid.Row="4"
@@ -195,9 +197,8 @@
 
             <Label
                 Grid.Row="4"
-                Grid.Column="3"                
-                Content="08-12-1997"
-                Style="{StaticResource userInfoLabel}"/>
+                Grid.Column="3"       
+                Style="{Binding DOB}"/>
 
 
         </Grid>

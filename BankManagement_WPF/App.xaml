@@ -53,6 +53,17 @@
             <Setter Property="Foreground" Value="Orange"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
         </Style>
+
+
+        <Style TargetType="TextBlock" x:Key="ErrorHandling">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <AdornedElementPlaceholder/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         
     </Application.Resources>
 </Application>

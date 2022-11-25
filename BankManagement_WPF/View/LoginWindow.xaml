@@ -17,6 +17,7 @@
     <StackPanel
         DataContext="{StaticResource LoginVm}"
         Margin="10">
+
         <Label 
             Content="UserName"
             Style ="{StaticResource generalLabelStyle}"/>

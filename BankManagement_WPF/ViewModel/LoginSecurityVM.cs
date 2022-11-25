@@ -4,6 +4,7 @@ using BankManagement_WPF.View.Admin;
 using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -13,8 +14,9 @@ using System.Windows;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class LoginSecurityVM : INotifyPropertyChanged
+    class LoginSecurityVM : INotifyPropertyChanged, INotifyDataErrorInfo
     {
+        private readonly Dictionary<string, List<string>> propertyErrors = new Dictionary<string, List<string>>();
         private string userName;
 
         public string UserName
@@ -24,6 +26,15 @@ namespace BankManagement_WPF.ViewModel
             {
                 userName = value;
                 OnPropertyChanged("UserName");
+
+                ClearErrors(nameof(UserName));
+
+                var list = new[] { "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "=", "\"" };
+                bool res = list.Any(value.Contains);
+                if(res)
+                {
+                    AddError(nameof(userName), "Invalid User Name. It must not contain any Special charachter except underscore(_)");
+                }
             }
         }
 
@@ -55,6 +66,7 @@ namespace BankManagement_WPF.ViewModel
         public LoginSecurityCommand LoginSecurityCommand { get; set; }
         public SignupCommand SignupCommand { get; set; }
 
+
         public LoginSecurityVM()
         {
             LoginSecurityCommand = new LoginSecurityCommand(this);
@@ -63,6 +75,10 @@ namespace BankManagement_WPF.ViewModel
 
         public async void MakeQuery()
         {
+            //validation
+            if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(PassWord))
+                return;
+
             string agent = await LoginSecurityHelper.LoginAgent(new LoginDetail { UserName = UserName, Password = PassWord });
 
             if(agent == "User")
@@ -91,9 +107,42 @@ namespace BankManagement_WPF.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        //Error Handling
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public bool HasErrors => propertyErrors.Any();
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return propertyErrors.GetValueOrDefault(propertyName, new List<string>());
+        }
+
+        public void AddError(string propertyName, string errorMessage)
+        {
+            if(!propertyErrors.ContainsKey(propertyName))
+            {
+                propertyErrors.Add(propertyName, new List<string>());
+            }
+
+            propertyErrors[propertyName].Add(errorMessage);
+            OnErrorsChanged(propertyName);
+        }
+
+        private void OnErrorsChanged(string propertName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertName));
+        }
+
+        private void ClearErrors(string propertyName)
+        {
+ //           propertyErrors.Clear();
+            OnErrorsChanged(propertyName);
         }
     }
 }

@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
-        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel" xmlns:components="clr-namespace:BankManagement_WPF.View.Components"
         Background="LightGoldenrodYellow"
         mc:Ignorable="d"
-        Title="Create Your Account" Height="600" Width="400">
+        Title="Create Your Account" Height="650" Width="400">
 
     <Window.Resources>
         <vm:SignupVM x:Key="SignupVm"/>
@@ -16,7 +16,7 @@
     <StackPanel
         DataContext="{StaticResource SignupVm}"
         Margin="10">
-        
+
         <Label
             
             Content="Name"
@@ -31,7 +31,7 @@
         <Label
             Content="Password"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <components:PasswordBoxControl  Password="{Binding PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <Label
             Content="Address"
@@ -67,6 +67,7 @@
             Content="Date Of Birth"
             Style ="{StaticResource generalLabelStyle}"/>
         <DatePicker
+            SelectedDateFormat="Short"  
             SelectedDate="{Binding DOB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         
         <Label
@@ -93,8 +94,15 @@
             BorderThickness="0"
             Background="LightGoldenrodYellow"
             Foreground="DarkBlue"
+            FontWeight="Bold"/>
+
+        <Label
+            Content="{Binding Warning,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource generalLabelStyle}"
+            Foreground="Red"
+            FontSize="14"
             FontWeight="Bold"
-            Click="CreateAccountButton_Click"/>
+            HorizontalAlignment="Center"/>
     </StackPanel>
 
 </Window>

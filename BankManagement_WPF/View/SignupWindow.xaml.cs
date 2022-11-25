@@ -24,9 +24,5 @@ namespace BankManagement_WPF.View
             InitializeComponent();
         }
 
-        private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
     }
 }
