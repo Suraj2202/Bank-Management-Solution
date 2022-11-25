@@ -4,10 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
         Background="LightCyan"
         mc:Ignorable="d"
         Title="Apply Loan" Height="450" Width="400">
+
+    <Window.Resources>
+        <vm:ApplyLoanVM x:Key="ApplyLoanVm"/>
+    </Window.Resources>
+
     <StackPanel
+        DataContext="{StaticResource ApplyLoanVm}"
         HorizontalAlignment="Center">
         
         <Label Content="Self Loan Bank"
@@ -35,7 +42,8 @@
             <Label
             Content="Loan Type"
             Style ="{StaticResource generalLabelStyle}"/>
-            <ComboBox>
+            <ComboBox
+                SelectedItem="{Binding LoanType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <ComboBoxItem>
                     Personal
                 </ComboBoxItem>
@@ -48,27 +56,44 @@
             <Label
             Content="Loan Amount"
             Style ="{StaticResource generalLabelStyle}"/>
-            <TextBox/>
+            <TextBox 
+                Text="{Binding LoanAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label
             Content="Loan Date"
             Style ="{StaticResource generalLabelStyle}"/>
-            <DatePicker/>
+            <DatePicker
+                SelectedDateFormat="Short"
+                SelectedDate="{Binding LoanDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <Label
-            Content="Rate Of Interest"
+            Content="ROI (based on Loan Duration)"
             Style ="{StaticResource generalLabelStyle}"/>
-            <TextBox/>
+            
+            <Label
+            Content="{Binding ROI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Style ="{StaticResource infoLabel}"/>
 
             <Label
-            Content="Duration OF Loan"
+            Content="Duration OF Loan (in Months)"
             Style ="{StaticResource generalLabelStyle}"/>
-            <TextBox/>
+            <TextBox
+                Text="{Binding LoanDuration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Button
+                Command="{Binding LoanApplyCommand}"
                 Content="Apply"
                 Margin="10"
                 Style="{StaticResource generalButtonStyle}"/>
         </StackPanel>
+        
+        <Label
+            Content="{Binding Warning,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource generalLabelStyle}"
+            Foreground="Red"
+            FontSize="14"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"/>
+        
     </StackPanel>
 </Window>

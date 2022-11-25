@@ -4,7 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
-        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel" xmlns:components="clr-namespace:BankManagement_WPF.View.Components"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
+        xmlns:components="clr-namespace:BankManagement_WPF.View.Components"
         Background="LightGoldenrodYellow"
         mc:Ignorable="d"
         Title="Create Your Account" Height="650" Width="400">
