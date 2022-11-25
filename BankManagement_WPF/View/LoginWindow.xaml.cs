@@ -25,23 +25,6 @@ namespace BankManagement_WPF.View
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            //For User Login
-
-            DashboardWindow dashboard = new DashboardWindow();
-            dashboard.Show();
-            this.Close();
-
-            /*
-                        //For Admin Login
-
-                        AdminDashboardWindow dashboard = new AdminDashboardWindow();
-                        dashboard.Show();
-                        this.Close();
-            */
-        }
-
         private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
         {
             SignupWindow signupWindow = new SignupWindow();

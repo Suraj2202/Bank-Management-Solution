@@ -25,13 +25,6 @@ namespace BankManagement_WPF.View
 
         }
 
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            //do my stuff before closing
-            new LoginWindow().Show();
-            base.OnClosing(e);
-        }
-
 
         private void ApplyLoanButton_Click(object sender, RoutedEventArgs e)
         {

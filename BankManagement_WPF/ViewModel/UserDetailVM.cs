@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BankManagement_WPF.ViewModel.Commands;
+using BankManagement_WPF.ViewModel.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class UserDetailVM : INotifyPropertyChanged
+    public class UserDetailVM : INotifyPropertyChanged
     {
         private string userName;
 
@@ -19,6 +21,26 @@ namespace BankManagement_WPF.ViewModel
                 userName = value;
                 OnPropertyChanged("UserName");
             }
+        }
+
+        private string passWord;
+
+        public string PassWord
+        {
+            get { return passWord; }
+            set { passWord = value; }
+        }
+
+        public UserDetailsCommand UserDetailsCommand { get; set; }
+
+        public UserDetailVM()
+        {
+            UserDetailsCommand = new UserDetailsCommand(this);
+        }
+
+        public async void MakeQuery()
+        {
+            var userDetail = await LoginSecurityHelper.GetUserDetail(UserName);
         }
 
 

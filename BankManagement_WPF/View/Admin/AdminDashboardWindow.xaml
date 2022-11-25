@@ -9,8 +9,25 @@
 
     <StackPanel>
 
-        <Label Content="Self Loan Bank"
-                Style="{StaticResource HeadingLabelStyle}"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Self Loan Bank"
+                Style="{StaticResource HeadingLabelStyle}"
+                   HorizontalAlignment="Center"/>
+
+            <Button
+                Grid.Column="1"
+                Content="Log Out"
+                Margin="10,0"
+                Foreground="Red"
+                Background="White"
+                FontSize="16"
+                BorderThickness="0"/>
+        </Grid>
         <Image
         Margin="5,0" 
         Source="/Images/banner.jpg"/>

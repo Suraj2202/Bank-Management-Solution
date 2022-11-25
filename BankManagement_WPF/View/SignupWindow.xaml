@@ -4,55 +4,76 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
         Background="LightGoldenrodYellow"
         mc:Ignorable="d"
         Title="Create Your Account" Height="600" Width="400">
+
+    <Window.Resources>
+        <vm:SignupVM x:Key="SignupVm"/>
+    </Window.Resources>
+
     <StackPanel
+        DataContext="{StaticResource SignupVm}"
         Margin="10">
+        
         <Label
+            
             Content="Name"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="User Name"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="Password"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="Address"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="State"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="Country"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="Email ID"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding EmailId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="PAN Number"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding PAN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="Contact Number"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox  Text="{Binding ContactNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="Date Of Birth"
             Style ="{StaticResource generalLabelStyle}"/>
-        <DatePicker/>
+        <DatePicker
+            SelectedDate="{Binding DOB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        
         <Label
             Content="Account Type"
             Style ="{StaticResource generalLabelStyle}"/>
-        <ComboBox>
+        <ComboBox
+            SelectedItem="{Binding AccountType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ComboBoxItem>
                 Current
             </ComboBoxItem>
@@ -63,6 +84,7 @@
         </ComboBox>
 
         <Button
+            Command="{Binding CreateAccountCommand}"
             Content="| Create Account |"
             Margin="5,10"
             Width="auto"
