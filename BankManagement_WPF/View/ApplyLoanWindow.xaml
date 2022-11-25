@@ -81,7 +81,7 @@
                 Text="{Binding LoanDuration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Button
-                Command="{Binding LoanApplyCommand}"
+                Command="{Binding ApplyLoanCommand}"
                 Content="Apply"
                 Margin="10"
                 Style="{StaticResource generalButtonStyle}"/>

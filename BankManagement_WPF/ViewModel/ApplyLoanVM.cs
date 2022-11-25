@@ -1,5 +1,6 @@
 ﻿using BankManagement_WPF.Model;
 using BankManagement_WPF.Validations;
+using BankManagement_WPF.View;
 using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
@@ -55,7 +56,7 @@ namespace BankManagement_WPF.ViewModel
         public string LoanDuration
         {
             get { return loanDuration; }
-            set { loanDuration = value; OnPropertyChanged("LoanDuration"); }
+            set{ loanDuration = value; OnPropertyChanged("LoanDuration"); }
         }
 
         private string warning;
@@ -63,7 +64,7 @@ namespace BankManagement_WPF.ViewModel
         public string Warning
         {
             get { return warning; }
-            set { warning = value; }
+            set { warning = value; OnPropertyChanged("Warning"); }
         }
 
         TextBlockValidation textBlockValidation;
@@ -74,7 +75,7 @@ namespace BankManagement_WPF.ViewModel
         {
             //Session Check
 
-
+            ROI = "20";
             ApplyLoanCommand = new ApplyLoanCommand(this);
             textBlockValidation = new TextBlockValidation();
         }
@@ -102,7 +103,7 @@ namespace BankManagement_WPF.ViewModel
 
             if (LoanDuration.Any(char.IsLetter) || LoanDuration.Any(char.IsSymbol) || LoanDuration.Any(char.IsPunctuation))
             {
-                Warning = "Loan Amount should be numbers only";
+                Warning = "Loan Duration should be numbers only";
                 return;
             }
 
@@ -125,6 +126,12 @@ namespace BankManagement_WPF.ViewModel
             string status = await ApplyLoanHelper.CreateLoan(loan);
 
             Warning = status;
+        }
+
+        public void PreviousAppliedLoanWindowOpen()
+        {
+            PreviousAppliedLoansWindow loansWindow = new PreviousAppliedLoansWindow();
+            loansWindow.ShowDialog();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

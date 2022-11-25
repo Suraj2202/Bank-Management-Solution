@@ -9,13 +9,9 @@ namespace BankManagement_WPF.ViewModel.Commands
 {
     class ApplyLoanCommand : ICommand
     {
-        public ApplyLoanVM VM { set; get; }
+        public ApplyLoanVM VM { get; set; }
 
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
+        public event EventHandler CanExecuteChanged;
 
         public ApplyLoanCommand(ApplyLoanVM vm)
         {
