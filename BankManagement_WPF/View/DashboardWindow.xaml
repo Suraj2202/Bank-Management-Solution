@@ -99,8 +99,10 @@
 
             <Label
                 Grid.Row="0"
-                Grid.Column="1"
-                Style="{Binding UserName}"/>
+                Grid.Column="1"                
+                Content="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
+            
             <Label
                 Grid.Row="0"
                 Grid.Column="2"                
@@ -109,8 +111,9 @@
 
             <Label
                 Grid.Row="0"
-                Grid.Column="3"
-                Style="{Binding AccountType}"/>
+                Grid.Column="3"                
+                Content="{Binding AccountType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
             <Label
                 Grid.Row="1"
@@ -120,8 +123,9 @@
 
             <Label
                 Grid.Row="1"
-                Grid.Column="1"
-                Style="{Binding Name}"/>
+                Grid.Column="1"                
+                Content="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
             <Label
                 Grid.Row="2"
@@ -132,7 +136,8 @@
             <Label
                 Grid.Row="2"
                 Grid.Column="1"                
-                Style="{Binding Address}"/>
+                Content="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
             <Label
                 Grid.Row="3"
@@ -142,8 +147,9 @@
 
             <Label
                 Grid.Row="3"
-                Grid.Column="1"        
-                Style="{Binding State}"/>
+                Grid.Column="1"                
+                Content="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
             <Label
                 Grid.Row="4"
@@ -153,8 +159,9 @@
 
             <Label
                 Grid.Row="4"
-                Grid.Column="1"  
-                Style="{Binding Country}"/>
+                Grid.Column="1"                
+                Content="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
             <Label
                 Grid.Row="1"
@@ -164,8 +171,9 @@
 
             <Label
                 Grid.Row="1"
-                Grid.Column="3"          
-                Style="{Binding EmailId}"/>
+                Grid.Column="3"                
+                Content="{Binding EmailId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
             <Label
                 Grid.Row="2"
@@ -175,8 +183,9 @@
 
             <Label
                 Grid.Row="2"
-                Grid.Column="3"    
-                Style="{Binding PAN}"/>
+                Grid.Column="3"                
+                Content="{Binding PAN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
             <Label
                 Grid.Row="3"
@@ -186,8 +195,9 @@
 
             <Label
                 Grid.Row="3"
-                Grid.Column="3"      
-                Style="{Binding ContactNo}"/>
+                Grid.Column="3"                
+                Content="{Binding ContactNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
             <Label
                 Grid.Row="4"
@@ -197,8 +207,9 @@
 
             <Label
                 Grid.Row="4"
-                Grid.Column="3"       
-                Style="{Binding DOB}"/>
+                Grid.Column="3"                
+                Content="{Binding DOB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Style="{StaticResource userInfoLabel}"/>
 
 
         </Grid>

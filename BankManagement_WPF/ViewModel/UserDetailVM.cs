@@ -1,4 +1,5 @@
-﻿using BankManagement_WPF.ViewModel.Commands;
+﻿using BankManagement_WPF.View;
+using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
 using System.Collections.Generic;
@@ -151,6 +152,7 @@ namespace BankManagement_WPF.ViewModel
 
         public UserDetailVM()
         {
+            GetUserDetails();
             UserDetailsCommand = new UserDetailsCommand(this);
         }
 
@@ -158,12 +160,20 @@ namespace BankManagement_WPF.ViewModel
         {
             var userDetail = await LoginSecurityHelper.GetUserDetail(UserName);
         }
-        public async void GetDetails()
+        public async void GetUserDetails()
         {
-            var userDetail = await LoginSecurityHelper.GetUserDetail(UserName);
+            var userDetail = await LoginSecurityHelper.GetUserDetail(GlobalVariables.USERNAME);
 
             UserName = userDetail.UserName;
-            PassWord = 
+            PassWord = userDetail.Password;
+            Name = userDetail.Name;
+            Address = userDetail.Address;
+            State = userDetail.State;
+            Country = userDetail.Country;
+            EmailId = userDetail.Email;
+            PAN = userDetail.PAN.ToString();
+            ContactNo = userDetail.Contact.ToString();
+            DOB = userDetail.DOB.ToString("dd/MM/yyyy");
         }
 
 

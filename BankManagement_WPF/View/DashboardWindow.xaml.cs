@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BankManagement_WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,17 @@ namespace BankManagement_WPF.View
     /// </summary>
     public partial class DashboardWindow : Window
     {
+        private string userName;
+
+        public string Username
+        {
+            get { return userName; }
+            set { userName = value; }
+        }
+
         public DashboardWindow()
         {
             InitializeComponent();
-
         }
 
 

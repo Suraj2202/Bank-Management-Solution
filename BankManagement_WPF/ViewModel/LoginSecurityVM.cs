@@ -67,6 +67,7 @@ namespace BankManagement_WPF.ViewModel
         public SignupCommand SignupCommand { get; set; }
 
 
+
         public LoginSecurityVM()
         {
             LoginSecurityCommand = new LoginSecurityCommand(this);
@@ -84,10 +85,9 @@ namespace BankManagement_WPF.ViewModel
             if(agent == "User")
             {
                 //For User Login
-
+                GlobalVariables.USERNAME = UserName;
                 DashboardWindow dashboard = new DashboardWindow();
                 dashboard.ShowDialog();
-
             }
             else if(agent == "Admin")
             {
