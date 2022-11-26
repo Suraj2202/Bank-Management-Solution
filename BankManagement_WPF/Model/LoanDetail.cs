@@ -15,5 +15,6 @@ namespace BankManagement_WPF.Model
         public DateTime LoanDate { get; set; }
         public float RateOfInterest { get; set; }
         public int LoanDuration { get; set; }
+        public string Status { get; set; }
     }
 }

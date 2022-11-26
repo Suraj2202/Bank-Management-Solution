@@ -59,17 +59,17 @@
             <Button 
                 Grid.Column="1"
                 Content="Apply Loan"
-                Click="ApplyLoanButton_Click"
+                Command="{Binding DashboardApplyLoanCommand}"
                 Style="{StaticResource dashboardButtonStyle}"/>
             <Button 
                 Grid.Column="2"
                 Content="Previous Loan"
-                Click="PreviousLoanButton_Click"
+                Command="{Binding DashboardPreviousLoanCommand}"
                 Style="{StaticResource dashboardButtonStyle}"/>
             <Button 
                 Grid.Column="3"
                 Content="Update Details"
-                Click="UpdateDetailsButton_Click"
+                Command="{Binding DashboardUpdateDetailsCommand}"
                 Style="{StaticResource dashboardButtonStyle}"/>
         </Grid>
 

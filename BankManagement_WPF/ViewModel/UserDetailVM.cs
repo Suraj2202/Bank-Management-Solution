@@ -147,19 +147,44 @@ namespace BankManagement_WPF.ViewModel
             }
         }
 
-
-        public UserDetailsCommand UserDetailsCommand { get; set; }
+        public DashboardApplyLoanCommand DashboardApplyLoanCommand { get; set; }
+        public DashboardPreviousLoanCommand DashboardPreviousLoanCommand { get; set; }
+        public DashboardUpdateDetailsCommand DashboardUpdateDetailsCommand { get; set; }
 
         public UserDetailVM()
         {
             GetUserDetails();
-            UserDetailsCommand = new UserDetailsCommand(this);
+            DashboardApplyLoanCommand = new DashboardApplyLoanCommand(this);
+            DashboardPreviousLoanCommand = new DashboardPreviousLoanCommand(this);
+            DashboardUpdateDetailsCommand = new DashboardUpdateDetailsCommand(this);
+
         }
 
-        public async void MakeQuery()
+        public void OpenApplyLoanWindow()
         {
-            var userDetail = await LoginSecurityHelper.GetUserDetail(UserName);
+            ApplyLoanWindow loanWindow = new ApplyLoanWindow();
+            loanWindow.ShowDialog();
         }
+
+        public void OpenPreviousLoanWindow()
+        {
+            PreviousAppliedLoansWindow previousloanWindow = new PreviousAppliedLoansWindow();
+            previousloanWindow.ShowDialog();
+        }
+
+        public void OpenUpdateUserDetailsWindow()
+        {
+            UpdateUserDetailWindow updatedUserWindow = new UpdateUserDetailWindow();
+            updatedUserWindow.ShowDialog();
+        }
+
+        public void Logout()
+        {
+            //Todo
+        }
+
+
+
         public async void GetUserDetails()
         {
             var userDetail = await LoginSecurityHelper.GetUserDetail(GlobalVariables.USERNAME);
@@ -174,6 +199,7 @@ namespace BankManagement_WPF.ViewModel
             PAN = userDetail.PAN.ToString();
             ContactNo = userDetail.Contact.ToString();
             DOB = userDetail.DOB.ToString("dd/MM/yyyy");
+            AccountType = userDetail.AccountType;
         }
 
 

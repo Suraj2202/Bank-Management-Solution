@@ -7,34 +7,25 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    public class UserDetailsCommand : ICommand
+    public class DashboardPreviousLoanCommand : ICommand
     {
         public UserDetailVM VM { get; set; }
 
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-
-        public UserDetailsCommand(UserDetailVM vm)
+        public DashboardPreviousLoanCommand(UserDetailVM vm)
         {
             VM = vm;
         }
 
+        public event EventHandler CanExecuteChanged;
+
         public bool CanExecute(object parameter)
         {
-            string userName = parameter as string;
-
-            if (string.IsNullOrWhiteSpace(userName))
-                return false;
-
             return true;
         }
 
         public void Execute(object parameter)
         {
-            //
+            VM.OpenPreviousLoanWindow();
         }
     }
 }

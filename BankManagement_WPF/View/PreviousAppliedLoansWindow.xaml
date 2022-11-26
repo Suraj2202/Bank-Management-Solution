@@ -3,10 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BankManagement_WPF.View"
+        xmlns:local="clr-namespace:BankManagement_WPF.View"        
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
         mc:Ignorable="d"
+        x:Name="previousAppliedLoansWindow"
         Title="Previous Applied Loans" Height="450" Width="800">
-    <StackPanel>
+
+
+    <Window.Resources>
+        <vm:PreviousAppliedLoansVM x:Key="PreviousAppliedLoansVm"/>
+    </Window.Resources>
+
+
+    <StackPanel
+        DataContext="{StaticResource PreviousAppliedLoansVm}">
 
         <Label Content="Self Loan Bank"
                 Style="{StaticResource HeadingLabelStyle}"/>
@@ -20,53 +30,50 @@
             Style="{StaticResource userInfoLabel}"
             FontSize="16"/>
 
-        <Grid
-            Margin="10,0">
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Label
-                Grid.Column="0"
-                Content="Loan Id"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="1"
-                Content="Type"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="2"
-                Content="Amount"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="3"
-                Content="Date"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="4"
-                Content="Rate Of Interest"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="5"
-                Content="Loan Duration"
-                Style="{StaticResource infoLabel}"/>
-
-        </Grid>
         <Separator
             Margin="0,0,10,0"
             Style="{StaticResource generalSeparatorStyle}"/>
+
+
+        <Grid
+            Margin="10">
+            <DataGrid
+                ItemsSource="{Binding LoanDetails}"
+                AutoGenerateColumns="False"
+                AlternatingRowBackground="Orange"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Loan Id" Width="auto" Binding="{Binding LoanId}"/>
+                    <DataGridTextColumn Header="Loan Type" Width="*" Binding="{Binding LoanType}"/>
+                    <DataGridTextColumn Header="Loan Amount" Width="*" Binding="{Binding LoanAmount}"/>
+                    <DataGridTextColumn Header="Loan Date" Width="*" Binding="{Binding LoanDate,StringFormat=d}"/>
+                    <DataGridTextColumn Header="Loan ROI" Width="*" Binding="{Binding RateOfInterest}"/>
+                    <DataGridTextColumn Header="Loan Duration" Width="*" Binding="{Binding LoanDuration}"/>
+                    <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Command="{Binding DataContext.CancelLoanCommand,ElementName = previousAppliedLoansWindow }"
+                                    CommandParameter="{Binding}"
+                                    Content="Cancel"
+                                    Background="White"
+                                    Foreground="Red"
+                                    FontSize="16"
+                                    BorderThickness="0"
+                                    />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                
+            </DataGrid>
+
+
+        </Grid>
+
 
     </StackPanel>
 </Window>

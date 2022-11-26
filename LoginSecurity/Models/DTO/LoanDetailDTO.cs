@@ -14,5 +14,6 @@ namespace LoginSecurity.Models.DTO
         public DateTime LoanDate { get; set; }
         public float RateOfInterest { get; set; }
         public int LoanDuration { get; set; }
+        public string Status { get; set; }
     }
 }

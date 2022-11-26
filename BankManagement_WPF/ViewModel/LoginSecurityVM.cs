@@ -79,25 +79,32 @@ namespace BankManagement_WPF.ViewModel
             //validation
             if (string.IsNullOrWhiteSpace(UserName) || string.IsNullOrWhiteSpace(PassWord))
                 return;
+            try
+            {
+                string agent = await LoginSecurityHelper.LoginAgent(new LoginDetail { UserName = UserName, Password = PassWord });
 
-            string agent = await LoginSecurityHelper.LoginAgent(new LoginDetail { UserName = UserName, Password = PassWord });
+                if (agent == "User")
+                {
+                    //For User Login
+                    GlobalVariables.USERNAME = UserName;
+                    DashboardWindow dashboard = new DashboardWindow();
+                    dashboard.ShowDialog();
+                }
+                else if (agent == "Admin")
+                {
+                    AdminDashboardWindow dashboard = new AdminDashboardWindow();
+                    dashboard.ShowDialog();
+                }
+                else
+                {
+                    Warning = "Something Went Wrong !!!";
+                }
+            }
+            catch(Exception)
+            {
+                Warning = "Report to Administration.";
+            }
 
-            if(agent == "User")
-            {
-                //For User Login
-                GlobalVariables.USERNAME = UserName;
-                DashboardWindow dashboard = new DashboardWindow();
-                dashboard.ShowDialog();
-            }
-            else if(agent == "Admin")
-            {
-                AdminDashboardWindow dashboard = new AdminDashboardWindow();
-                dashboard.ShowDialog();
-            }
-            else
-            {
-                Warning = "Something Went Wrong !!!";
-            }
         }
 
         public void OpenSignupWindow()

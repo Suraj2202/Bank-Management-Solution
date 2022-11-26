@@ -33,7 +33,7 @@
             Foreground="Purple"
             FontWeight="SemiBold"
             FontSize="14"
-            Click="PreviousAppliedButton_Click"/>
+            Command="{Binding PreviousAppliedLoansCommand}"/>
 
         <StackPanel
             Margin="10,10,0,0"
