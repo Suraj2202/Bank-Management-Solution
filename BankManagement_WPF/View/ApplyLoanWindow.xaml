@@ -67,7 +67,7 @@
                 SelectedDate="{Binding LoanDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <Label
-            Content="ROI (based on Loan Duration)"
+            Content="ROI % (based on Loan Duration)"
             Style ="{StaticResource generalLabelStyle}"/>
             
             <Label

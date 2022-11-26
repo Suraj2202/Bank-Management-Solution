@@ -56,7 +56,13 @@ namespace BankManagement_WPF.ViewModel
         public string LoanDuration
         {
             get { return loanDuration; }
-            set{ loanDuration = value; OnPropertyChanged("LoanDuration"); }
+            set
+            { 
+                loanDuration = value;
+                float duration = float.Parse(LoanDuration);
+                ROI = (duration / 12).ToString(); 
+                OnPropertyChanged("LoanDuration");
+            }
         }
 
         private string warning;
@@ -75,7 +81,7 @@ namespace BankManagement_WPF.ViewModel
         {
             //Session Check
 
-            ROI = "20";
+            ROI = "0";
             ApplyLoanCommand = new ApplyLoanCommand(this);
             textBlockValidation = new TextBlockValidation();
         }
