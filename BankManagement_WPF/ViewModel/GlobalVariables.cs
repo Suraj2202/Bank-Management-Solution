@@ -24,9 +24,9 @@ namespace BankManagement_WPF.ViewModel
             set { jwtToken = value; }
         }
 
-        private int londId;
+        private static int londId;
 
-        public int LOANID
+        public static int LOANID
         {
             get { return londId; }
             set { londId = value; }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BankManagement_WPF.View"
         mc:Ignorable="d"
         Background="LightCyan"
-        Title="" Height="100" Width="450" WindowStartupLocation="CenterOwner">
+        Title="" Height="130" Width="450" WindowStartupLocation="CenterScreen">
     
     <StackPanel
         HorizontalAlignment="Center">

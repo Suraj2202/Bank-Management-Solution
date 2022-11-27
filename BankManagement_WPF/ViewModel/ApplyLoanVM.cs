@@ -4,11 +4,8 @@ using BankManagement_WPF.View;
 using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel
 {
@@ -134,7 +131,8 @@ namespace BankManagement_WPF.ViewModel
                 LoanDate = DateTime.Parse(myDate),
                 LoanAmount = double.Parse(LoanAmount),
                 LoanDuration = int.Parse(LoanDuration),
-                RateOfInterest = float.Parse(ROI),                
+                RateOfInterest = float.Parse(ROI),
+                Status = "Pending"
             };
 
             string status = await ApplyLoanHelper.CreateLoan(loan);

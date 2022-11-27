@@ -39,6 +39,7 @@
             Margin="10">
             <DataGrid
                 ItemsSource="{Binding LoanDetails}"
+                SelectionChanged="DataGrid_SelectionChanged"
                 AutoGenerateColumns="False"
                 AlternatingRowBackground="Orange"
                 CanUserAddRows="False"
@@ -55,15 +56,19 @@
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button
-                                    Command="{Binding DataContext.CancelLoanCommand,ElementName = previousAppliedLoansWindow }"
-                                    CommandParameter="{Binding}"
+                                
+                                <Grid
+                                    DataContext="{StaticResource PreviousAppliedLoansVm}">
+                                    <Button
+                                    Command="{Binding CancelLoanCommand}"
                                     Content="Cancel"
                                     Background="White"
                                     Foreground="Red"
                                     FontSize="16"
                                     BorderThickness="0"
                                     />
+                                </Grid>
+                                
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

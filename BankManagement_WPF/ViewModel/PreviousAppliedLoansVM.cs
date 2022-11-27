@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace BankManagement_WPF.ViewModel
 {
@@ -29,21 +30,31 @@ namespace BankManagement_WPF.ViewModel
             }
         }
 
-        private DelegateCommand<LoanDetail> cancelLoanCommand;
+        private DelegateCommand<BindableCollection<LoanDetail>> cancelLoanCommand;
 
-        public DelegateCommand<LoanDetail> CancelLoanCommand => cancelLoanCommand ?? (cancelLoanCommand = new DelegateCommand<LoanDetail>(ExecutableCancelCommand));
+        public DelegateCommand<BindableCollection<LoanDetail>> CancelLoanCommand => cancelLoanCommand ?? (cancelLoanCommand = new DelegateCommand<BindableCollection<LoanDetail>>(ExecutableCancelCommand));
 
-        void ExecutableCancelCommand(LoanDetail obj)
+        private void ExecutableCancelCommand(BindableCollection<LoanDetail> obj)
         {
-            throw new NotImplementedException();
+            int check = GlobalVariables.LOANID;
+            CancelLoanWindow window = new CancelLoanWindow();
+            window.ShowDialog();
         }
 
+        /*void ExecutableCancelCommand(BindableCollection<LoanDetail> obj)
+        {
+            //GlobalVariables.LOANID = obj;
+            CancelLoanWindow window = new CancelLoanWindow();
+            window.ShowDialog();
+        }
+*/
         TextBlockValidation textBlockValidation;
 
         public PreviousAppliedLoansCommand PreviousAppliedLoansCommand { get; set; }
 
         public PreviousAppliedLoansVM()
         {
+            GlobalVariables.LOANID = 0;
             textBlockValidation = new TextBlockValidation();
             DisplayAllAttributes();
         }
@@ -54,6 +65,7 @@ namespace BankManagement_WPF.ViewModel
             LoanDetails = new BindableCollection<LoanDetail>(response);
         }
 
+        public event SelectionChangedEventHandler SelectionChanged;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
