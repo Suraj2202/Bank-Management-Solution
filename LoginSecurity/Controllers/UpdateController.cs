@@ -23,7 +23,6 @@ namespace LoginSecurity.Controllers
             this.loanRepository = loanRepository;
         }
 
-        // PUT api/<UpdateController>/5
         [Route("api/[controller]/loan/{id}")]
         [HttpPut]
         public async Task<IActionResult> Put(int id, [FromBody] LoanDetail value)
@@ -36,12 +35,23 @@ namespace LoginSecurity.Controllers
                 return BadRequest("Something Went Wrong");
         }
 
-        // DELETE api/<UpdateController>/5
         [Route("api/[controller]/user/{uname}")]
         [HttpPut]
         public async Task<IActionResult> Put(string uname, [FromBody] UserDetail value)
         {
             bool res = await userRepository.UpdateUserDeatilAsync(uname, value);
+
+            if (res)
+                return Ok("Updated Successfully");
+            else
+                return BadRequest("Something Went Wrong");
+        }
+
+        [Route("api/[controller]/status/{id}")]
+        [HttpPut]
+        public async Task<IActionResult> Put(int id, [FromBody] string value)
+        {
+            bool res = await loanRepository.UpdateLoanStatusAsync(id, value);
 
             if (res)
                 return Ok("Updated Successfully");

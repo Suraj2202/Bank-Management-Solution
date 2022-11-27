@@ -65,5 +65,27 @@ namespace LoginSecurity.Repositories
                 return false;
             }
         }
+
+        public async Task<bool> UpdateLoanStatusAsync(int loanId, string status)
+        {
+            try
+            {
+                LoanDetail loan = await GetLoanAsync(loanId);
+                if (loan != null)
+                {
+                    loan.Status = status;
+
+                    bankManagementDbContext.LoanDetails.Update(loan);
+                    await bankManagementDbContext.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
     }
 }
