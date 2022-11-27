@@ -209,13 +209,14 @@ namespace BankManagement_WPF.ViewModel
                 return;
             }
 
-            if(textBlockValidation.FutureDateValidation(DOB))
+            if(textBlockValidation.AgeGreaterThan18(DOB))
             {
-                Warning = "No Future Dates Please.";
+                Warning = "No Future Date Please and Age > 18.";
                 return;
             }
 
-            string[] dates= DOB.Split(" ")[0].Split("/");
+            string val = DOB.Contains("-") ? "-" : "/";
+            string[] dates= DOB.Split(" ")[0].Split(val);
             string myDate = dates[1]+ "/" + dates[0]+ "/" + dates[2];
 
             UserDetail user = new UserDetail()

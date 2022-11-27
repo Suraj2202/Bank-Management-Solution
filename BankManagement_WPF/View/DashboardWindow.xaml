@@ -30,6 +30,7 @@
 
             <Button
                 Grid.Column="1"
+                Command="{Binding SessionCommand}"
                 Content="Log Out"
                 Margin="10,0"
                 Foreground="Red"

@@ -40,7 +40,8 @@ namespace BankManagement_WPF.Validations
 
         public bool FutureDateValidation(string date)
         {
-            string[] dates = date.Split(" ")[0].Split("/");
+            string val = date.Contains("-") ? "-" : "/";
+            string[] dates = date.Split(" ")[0].Split(val);
             string myDate = dates[1] + "-" + dates[0] + "-" + dates[2];
 
             DateTime now = DateTime.Now.Date;
@@ -51,6 +52,23 @@ namespace BankManagement_WPF.Validations
                 return true;
             else
                 return false;
+        }
+
+        public bool AgeGreaterThan18(string date)
+        {
+            string val = date.Contains("-") ? "-" : "/";
+            string[] dates = date.Split(" ")[0].Split(val);
+            string myDate = dates[1] + "-" + dates[0] + "-" + dates[2];
+
+            DateTime now = DateTime.Now.Date;
+            DateTime selectedDate = DateTime.Parse(myDate);
+            int age = now.Year - selectedDate.Year;
+
+            if(age >= 18)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

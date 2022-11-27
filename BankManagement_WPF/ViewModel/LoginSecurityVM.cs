@@ -85,6 +85,7 @@ namespace BankManagement_WPF.ViewModel
 
                 if (agent == "User")
                 {
+                    Warning = "";
                     //For User Login
                     GlobalVariables.USERNAME = UserName;
                     DashboardWindow dashboard = new DashboardWindow();

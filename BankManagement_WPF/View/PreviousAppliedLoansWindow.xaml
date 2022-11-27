@@ -26,7 +26,7 @@
 
         <Label
             Margin="5"
-            Content="UserName"
+            Content="{Binding UserName}"
             Style="{StaticResource userInfoLabel}"
             FontSize="16"/>
 
@@ -52,7 +52,17 @@
                     <DataGridTextColumn Header="Loan Date" Width="*" Binding="{Binding LoanDate,StringFormat=d}"/>
                     <DataGridTextColumn Header="Loan ROI" Width="*" Binding="{Binding RateOfInterest}"/>
                     <DataGridTextColumn Header="Loan Duration" Width="*" Binding="{Binding LoanDuration}"/>
-                    <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
+                    <DataGridTemplateColumn Header="Status" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Status}"
+                                       Style="{StaticResource infoLabel}"
+                                       FontSize="12"
+                                       Foreground="DarkBlue"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -64,7 +74,7 @@
                                     Content="Cancel"
                                     Background="White"
                                     Foreground="Red"
-                                    FontSize="16"
+                                    FontSize="12"
                                     BorderThickness="0"
                                     />
                                 </Grid>

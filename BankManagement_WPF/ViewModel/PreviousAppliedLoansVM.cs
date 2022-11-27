@@ -18,6 +18,15 @@ namespace BankManagement_WPF.ViewModel
     class PreviousAppliedLoansVM : INotifyPropertyChanged
     {
 
+        private string userName;
+
+        public string UserName
+        {
+            get { return userName; }
+            set { userName = value; OnPropertyChanged("UserName"); }
+        }
+
+
         private BindableCollection<LoanDetail> loanDetails;
 
         public BindableCollection<LoanDetail> LoanDetails
@@ -34,11 +43,10 @@ namespace BankManagement_WPF.ViewModel
 
         public DelegateCommand<BindableCollection<LoanDetail>> CancelLoanCommand => cancelLoanCommand ?? (cancelLoanCommand = new DelegateCommand<BindableCollection<LoanDetail>>(ExecutableCancelCommand));
 
-        private void ExecutableCancelCommand(BindableCollection<LoanDetail> obj)
+        private async void ExecutableCancelCommand(BindableCollection<LoanDetail> obj)
         {
-            int check = GlobalVariables.LOANID;
-            CancelLoanWindow window = new CancelLoanWindow();
-            window.ShowDialog();
+            await UpdateDetailHelper.UpdateLoanStatus(GlobalVariables.LOANID, "CANCELED");
+            DisplayAllAttributes();
         }
 
         /*void ExecutableCancelCommand(BindableCollection<LoanDetail> obj)
@@ -61,6 +69,7 @@ namespace BankManagement_WPF.ViewModel
 
         private async void DisplayAllAttributes()
         {
+            UserName = GlobalVariables.USERNAME.ToUpperInvariant();
             var response = await PreviousAppliedLoansHelper.GetUserDetail(GlobalVariables.USERNAME);
             LoanDetails = new BindableCollection<LoanDetail>(response);
         }

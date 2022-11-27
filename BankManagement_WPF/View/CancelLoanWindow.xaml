@@ -4,9 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
         mc:Ignorable="d"
         Background="LightCyan"
         Title="" Height="130" Width="450" WindowStartupLocation="CenterScreen">
+
+
     
     <StackPanel
         HorizontalAlignment="Center">
@@ -17,6 +20,8 @@
             FontSize="16"/>
 
         <Button
+            Command="{Binding CancelLoanCommand}"
+            
             Background="LightCyan"
             BorderThickness="0"
             Content="OK"

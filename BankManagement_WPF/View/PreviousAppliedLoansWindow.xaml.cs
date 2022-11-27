@@ -29,7 +29,8 @@ namespace BankManagement_WPF.View
         {
             DataGrid dg = (DataGrid)sender;
             LoanDetail row = dg.SelectedItem as LoanDetail;
-            ViewModel.GlobalVariables.LOANID = row.LoanId;
+            if(row != null)
+                ViewModel.GlobalVariables.LOANID = row.LoanId;
         }
     }
 }

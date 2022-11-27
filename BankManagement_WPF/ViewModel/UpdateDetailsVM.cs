@@ -1,4 +1,5 @@
-﻿using BankManagement_WPF.View;
+﻿using BankManagement_WPF.Model;
+using BankManagement_WPF.Validations;
 using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
@@ -7,11 +8,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace BankManagement_WPF.ViewModel
 {
-    public class UserDetailVM : INotifyPropertyChanged
+    public class UpdateDetailsVM : INotifyPropertyChanged
     {
         private string name;
 
@@ -121,9 +121,6 @@ namespace BankManagement_WPF.ViewModel
             }
         }
 
-
-        public string EndDate { get; set; }
-
         private string dob;
 
         public string DOB
@@ -148,53 +145,28 @@ namespace BankManagement_WPF.ViewModel
             }
         }
 
-        public DashboardApplyLoanCommand DashboardApplyLoanCommand { get; set; }
-        public DashboardPreviousLoanCommand DashboardPreviousLoanCommand { get; set; }
-        public DashboardUpdateDetailsCommand DashboardUpdateDetailsCommand { get; set; }
-        public SessionCommand SessionCommand { get; set; }
+        private string warning;
 
-        public UserDetailVM()
+        public string Warning
+        {
+            get { return warning; }
+            set { warning = value; OnPropertyChanged("Warning"); }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        TextBlockValidation textBlockValidation;
+
+        public UpdateUserDetailCommand UpdateUserDetailCommand { get; set; }
+
+        public UpdateDetailsVM()
         {
             GetUserDetails();
-            DashboardApplyLoanCommand = new DashboardApplyLoanCommand(this);
-            DashboardPreviousLoanCommand = new DashboardPreviousLoanCommand(this);
-            DashboardUpdateDetailsCommand = new DashboardUpdateDetailsCommand(this);
-            SessionCommand = new SessionCommand(this);
+            textBlockValidation = new TextBlockValidation();
+            UpdateUserDetailCommand = new UpdateUserDetailCommand(this);
         }
 
-        public void OpenApplyLoanWindow()
-        {
-            ApplyLoanWindow loanWindow = new ApplyLoanWindow();
-            loanWindow.ShowDialog();
-        }
-
-        public void OpenPreviousLoanWindow()
-        {
-            PreviousAppliedLoansWindow previousloanWindow = new PreviousAppliedLoansWindow();
-            previousloanWindow.ShowDialog();
-        }
-
-        public void OpenUpdateUserDetailsWindow()
-        {
-            UpdateUserDetailWindow updatedUserWindow = new UpdateUserDetailWindow();
-            updatedUserWindow.ShowDialog();
-        }
-
-        public async Task<bool> Logout()
-        {
-            if (await SessionHelper.ValidateToken(GlobalVariables.USERNAME))
-            {
-                await SessionHelper.LogoutUser(GlobalVariables.USERNAME);
-                Application.Current.Shutdown();
-                return true;
-            }
-
-            return false;
-        }
-
-
-
-        public async void GetUserDetails()
+        private async void GetUserDetails()
         {
             var userDetail = await LoginSecurityHelper.GetUserDetail(GlobalVariables.USERNAME);
 
@@ -207,12 +179,77 @@ namespace BankManagement_WPF.ViewModel
             EmailId = userDetail.Email;
             PAN = userDetail.PAN.ToString();
             ContactNo = userDetail.Contact.ToString();
-            DOB = userDetail.DOB.ToString("dd/MM/yyyy");
+            DOB = userDetail.DOB.ToString("MM/dd/yyyy");
             AccountType = userDetail.AccountType;
         }
 
+        public async void UpdateUserDetails()
+        {
+            //Validation:
 
-        public event PropertyChangedEventHandler PropertyChanged;
+            if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(PassWord) || string.IsNullOrEmpty(EmailId) || string.IsNullOrEmpty(PAN) || string.IsNullOrEmpty(ContactNo) || string.IsNullOrEmpty(DOB))
+            {
+                Warning = "All Fields are mandatory";
+                return;
+            }
+
+            if (textBlockValidation.UserNameValidation(UserName))
+            {
+                Warning = " 7 < UserName > 21 and, must not have special character except _";
+                return;
+            }
+
+            if (!textBlockValidation.PasswordValidation(PassWord))
+            {
+                Warning = "Password must be inbetween 8-20 and must have 1 Caps, 1 Small and 1 Special character";
+                return;
+            }
+
+            if (!textBlockValidation.EmailIDValidation(EmailId))
+            {
+                Warning = "Invalid Email ID";
+                return;
+            }
+
+            if (!textBlockValidation.PANandContactNoValidation(PAN))
+            {
+                Warning = "Invalid PAN Number, 1st digit should not be 0 and must have 10 digits.";
+                return;
+            }
+
+            if (!textBlockValidation.PANandContactNoValidation(ContactNo))
+            {
+                Warning = "Invalid Contact Number, 1st digit should not be 0 and must have 10 digits.";
+                return;
+            }
+
+            if (textBlockValidation.AgeGreaterThan18(DOB))
+            {
+                Warning = "No Future Date Please and Age > 18.";
+                return;
+            }
+
+            string val = DOB.Contains("-") ? "-" : "/";
+            string[] dates = DOB.Split(" ")[0].Split(val);
+            string myDate = dates[1] + "/" + dates[0] + "/" + dates[2];
+
+            UserDetail user = new UserDetail()
+            {
+                Name = Name,
+                Password = PassWord,
+                Address = Address,
+                State = State,
+                Country = Country,
+                Email = EmailId,
+                PAN = long.Parse(PAN),
+                Contact = long.Parse(contactNo),
+                DOB = DateTime.Parse(myDate),
+            };
+
+            string updateStatus = await UpdateDetailHelper.UpdateUserDetail(GlobalVariables.USERNAME, user);
+
+            Warning = updateStatus;
+        }
 
         private void OnPropertyChanged(string propertyName)
         {

@@ -108,7 +108,7 @@ namespace BankManagement_WPF.ViewModel
 
             if (textBlockValidation.FutureDateValidation(LoanDate))
             {
-                Warning = "No Future Dates Please.";
+                Warning = "No Future Date Please.";
                 return;
             }
 
@@ -121,7 +121,8 @@ namespace BankManagement_WPF.ViewModel
             float duration = float.Parse(LoanDuration);
             ROI = (duration/12).ToString();
 
-            string[] dates = LoanDate.Split(" ")[0].Split("/");
+            string val = LoanDate.Contains("-") ? "-" : "/";
+            string[] dates = LoanDate.Split(" ")[0].Split(val);
             string myDate = dates[1] + "/" + dates[0] + "/" + dates[2];
 
             LoanDetail loan = new LoanDetail()

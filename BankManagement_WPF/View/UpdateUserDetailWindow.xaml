@@ -4,59 +4,77 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
         mc:Ignorable="d"
-        Title="Update User Detail" Height="600" Width="400">
+        Title="Update User Detail" Height="650" Width="400">
+
+    <Window.Resources>
+        <vm:UpdateDetailsVM x:Key="UpdateDetailsVm"/>
+    </Window.Resources>
+    
     <StackPanel
+        DataContext="{StaticResource UpdateDetailsVm}"
         Margin="10">
         <Label
-            Content="User Name"
+            Content="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Foreground="Red"/>
         <Separator
             Background="Black"/>
         <Label
             Content="Name"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox
+            Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="Password"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox
+            Text="{Binding PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="Address"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox
+            Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="State"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox
+            Text="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="Country"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox
+            Text="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="Email ID"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox
+            Text="{Binding EmailId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="PAN Number"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox
+            Text="{Binding PAN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="Contact Number"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox/>
+        <TextBox
+            Text="{Binding ContactNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="Date Of Birth"
             Style ="{StaticResource generalLabelStyle}"/>
-        <DatePicker/>
+        <DatePicker
+            SelectedDateFormat="Short"
+            SelectedDate="{Binding DOB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <Label
             Content="Account Type"
             Style ="{StaticResource generalLabelStyle}"/>
         <Label
-            Content="Saving"
+            Content="{Binding AccountType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Style="{StaticResource infoLabel}"/>
 
         <Button
+            Command="{Binding UpdateUserDetailCommand}"
             Content="| Update Details |"
             Margin="5,10"
             Width="auto"
@@ -67,6 +85,14 @@
             Foreground="DarkBlue"
             FontWeight="Bold"
             Click="UpdateAccountButton_Click"/>
+
+        <Label
+            Content="{Binding Warning,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource generalLabelStyle}"
+            Foreground="Red"
+            FontSize="14"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"/>
     </StackPanel>
 
 </Window>
