@@ -1,0 +1,46 @@
+﻿<Window x:Class="BankManagement_WPF.View.CommentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BankManagement_WPF.View"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        Height="180" Width="400" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <vm:CommentVM x:Key="CommentVm"/>
+    </Window.Resources>
+    
+    <StackPanel
+        DataContext="{StaticResource CommentVm}"
+        Margin="10"
+        VerticalAlignment="Center">
+
+        <Label
+            Content="Comment"/>
+        
+        <TextBox 
+            Text="{Binding Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Height="30"/>
+
+        <Button
+            Command="{Binding CommentCloseCommand}"
+            FontSize="20"
+            Margin="10"
+            Content="OK"
+            FontWeight="SemiBold"
+            Background="White"
+            Foreground="Blue"
+            BorderThickness="0"/>
+        
+        <Label
+            Content="{Binding Warning,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+            Style="{StaticResource generalLabelStyle}"
+            Foreground="Red"
+            FontSize="14"
+            FontWeight="Bold"
+            HorizontalAlignment="Center"/>
+    </StackPanel>
+</Window>

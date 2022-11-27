@@ -16,12 +16,12 @@ namespace BankManagement_WPF.ViewModel
             set { username = value; }
         }
 
-        private static string jwtToken;
+        private static string comment;
 
-        public static string JWTTOKEN
+        public static string COMMENT
         {
-            get { return jwtToken; }
-            set { jwtToken = value; }
+            get { return comment; }
+            set { comment = value; }
         }
 
         private static int londId;

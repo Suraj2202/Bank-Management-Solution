@@ -49,6 +49,7 @@
             
             <DataGrid
                 ItemsSource="{Binding LoanDetails}"
+                SelectionChanged="DataGrid_SelectionChanged"
                 AutoGenerateColumns="False"
                 AlternatingRowBackground="Orange"
                 CanUserAddRows="False"
@@ -68,14 +69,15 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
 
-                                <Grid>
+                                <Grid
+                                    DataContext="{StaticResource AdminDashboardVm}">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
                                     
                                     <Button
-                                        Command="{Binding ApproveLoanCommand}"
+                                        Command="{Binding ApprovedStatusCommand}"
                                         Content="Approve"
                                         Background="White"
                                         Foreground="Red"
@@ -86,7 +88,7 @@
                                     <Button
                                         Margin="5,0"
                                         Grid.Column="1"
-                                        Command="{Binding RejectLoanCommand}"
+                                        Command="{Binding RejectCommands}"
                                         Content="Reject"
                                         Background="White"
                                         Foreground="Red"
