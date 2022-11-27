@@ -70,7 +70,7 @@ namespace BankManagement_WPF.ViewModel
         private async void DisplayAllAttributes()
         {
             UserName = GlobalVariables.USERNAME.ToUpperInvariant();
-            var response = await PreviousAppliedLoansHelper.GetUserDetail(GlobalVariables.USERNAME);
+            var response = await PreviousAppliedLoansHelper.GetUserLoanDetail(GlobalVariables.USERNAME);
             LoanDetails = new BindableCollection<LoanDetail>(response);
         }
 

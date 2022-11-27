@@ -93,6 +93,7 @@ namespace BankManagement_WPF.ViewModel
                 }
                 else if (agent == "Admin")
                 {
+                    GlobalVariables.USERNAME = "admin";
                     AdminDashboardWindow dashboard = new AdminDashboardWindow();
                     dashboard.ShowDialog();
                 }

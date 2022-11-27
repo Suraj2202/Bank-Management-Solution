@@ -16,6 +16,12 @@ namespace LoginSecurity.Repositories
         {
             this.bankManagementDbContext = bankManagementDbContext;
         }
+
+        public async Task<List<LoanDetail>> GetAllAdminLoanAsync()
+        {
+            return await bankManagementDbContext.LoanDetails?.ToListAsync();
+        }
+
         public async Task<List<LoanDetail>> GetAllLoanAsync(string userName)
         {
             return await bankManagementDbContext.LoanDetails?.Where(x => x.UserName == userName).ToListAsync();
@@ -33,6 +39,28 @@ namespace LoginSecurity.Repositories
                 await bankManagementDbContext.LoanDetails.AddAsync(loanDetail);
                 await bankManagementDbContext.SaveChangesAsync();
                 return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateLoanCommentAsync(int loanId, string comment)
+        {
+            try
+            {
+                LoanDetail loan = await GetLoanAsync(loanId);
+                if (loan != null)
+                {
+                    loan.Comment = comment;
+
+                    bankManagementDbContext.LoanDetails.Update(loan);
+                    await bankManagementDbContext.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
             }
             catch (Exception)
             {

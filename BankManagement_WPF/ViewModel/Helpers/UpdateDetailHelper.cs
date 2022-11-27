@@ -13,6 +13,7 @@ namespace BankManagement_WPF.ViewModel.Helpers
     {
         public const string BASE_URL = "http://localhost:7001/api/";
         public const string LOANSTATUS_PUT_URL = "Update/status/{0}";
+        public const string LOANCOMMENT_PUT_URL = "Update/comment/{0}";
         public const string USER_PUT_URL = "Update/user/{0}";
 
 
@@ -39,6 +40,20 @@ namespace BankManagement_WPF.ViewModel.Helpers
             using (HttpClient httpClient = new HttpClient())
             {
                 var response = await httpClient.PutAsJsonAsync(URL, userDetail, default);
+                var json = await response.Content.ReadAsStringAsync();
+                agent = json.ToString();
+            }
+            return agent;
+        }
+
+        public static async Task<string> UpdateLoanComment(int loanId, string commentValue)
+        {
+            string agent;
+            string URL = BASE_URL + string.Format(LOANCOMMENT_PUT_URL, (long)loanId);
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                var response = await httpClient.PutAsJsonAsync(URL, commentValue, default);
                 var json = await response.Content.ReadAsStringAsync();
                 agent = json.ToString();
             }

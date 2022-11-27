@@ -58,5 +58,17 @@ namespace LoginSecurity.Controllers
             else
                 return BadRequest("Something Went Wrong");
         }
+
+        [Route("api/[controller]/comment/{id}")]
+        [HttpPut]
+        public async Task<IActionResult> Put(long id, [FromBody] string value)
+        {
+            bool res = await loanRepository.UpdateLoanCommentAsync((int)id, value);
+
+            if (res)
+                return Ok("Updated Successfully");
+            else
+                return BadRequest("Something Went Wrong");
+        }
     }
 }

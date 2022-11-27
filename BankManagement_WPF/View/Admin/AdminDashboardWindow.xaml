@@ -4,12 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BankManagement_WPF.View.Admin"
+        xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
         mc:Ignorable="d"
         Title="Admin Dashboard" Height="450" Width="800">
 
-    <StackPanel>
+    <Window.Resources>
+        <vm:AdminDashboardVM x:Key="AdminDashboardVm"/>
+        <vm:UserDetailVM x:Key="LogoutVm"/>
+    </Window.Resources>
 
-        <Grid>
+    <StackPanel
+        DataContext="{StaticResource AdminDashboardVm}">
+        
+        <Grid
+            DataContext="{StaticResource LogoutVm}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
@@ -20,6 +28,7 @@
                    HorizontalAlignment="Center"/>
 
             <Button
+                Command="{Binding SessionCommand}"
                 Grid.Column="1"
                 Content="Log Out"
                 Margin="10,0"
@@ -31,74 +40,66 @@
         <Image
         Margin="5,0" 
         Source="/Images/banner.jpg"/>
-        <Label
-            Content="Search"
-            HorizontalAlignment="Right"
-            Margin="0,10,140,0"
-            FontSize="20"
-            Foreground="Red"/>
-        <TextBox
-            HorizontalAlignment="Right"
-            Margin="0,0,10,0"
-            Width="200"
-            Height="30"/>
         
         <Separator
             Style="{StaticResource generalSeparatorStyle}"/>
-        
+
         <Grid
             Margin="5,10,0,0">
+            
+            <DataGrid
+                ItemsSource="{Binding LoanDetails}"
+                AutoGenerateColumns="False"
+                AlternatingRowBackground="Orange"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserSortColumns="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Loan Id" Width="auto" Binding="{Binding LoanId}"/>
+                    <DataGridTextColumn Header="Loan Type" Width="*" Binding="{Binding LoanType}"/>
+                    <DataGridTextColumn Header="Loan Amount" Width="*" Binding="{Binding LoanAmount}"/>
+                    <DataGridTextColumn Header="Loan Date" Width="*" Binding="{Binding LoanDate,StringFormat=d}"/>
+                    <DataGridTextColumn Header="Loan ROI" Width="*" Binding="{Binding RateOfInterest}"/>
+                    <DataGridTextColumn Header="Loan Duration" Width="*" Binding="{Binding LoanDuration}"/>
+                    <DataGridTextColumn Header="Status" Width="*" Binding="{Binding Status}"/>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
 
-            <Label
-                Grid.Column="0"
-                Content="UserName"
-                Style="{StaticResource infoLabel}"/>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
 
-            <Label
-                Grid.Column="1"
-                Content="Loan Id"
-                Style="{StaticResource infoLabel}"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <Button
+                                        Command="{Binding ApproveLoanCommand}"
+                                        Content="Approve"
+                                        Background="White"
+                                        Foreground="Red"
+                                        FontSize="12"
+                                        BorderThickness="2"
+                                        BorderBrush="DarkBlue"/>
+                                    
+                                    <Button
+                                        Margin="5,0"
+                                        Grid.Column="1"
+                                        Command="{Binding RejectLoanCommand}"
+                                        Content="Reject"
+                                        Background="White"
+                                        Foreground="Red"
+                                        FontSize="12"
+                                        BorderThickness="2"
+                                        BorderBrush="DarkBlue"/>
+                                </Grid>
 
-            <Label
-                Grid.Column="2"
-                Content="Type"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="3"
-                Content="Amount"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="4"
-                Content="Date"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="5"
-                Content="ROI"
-                Style="{StaticResource infoLabel}"/>
-
-            <Label
-                Grid.Column="6"
-                Content="Duration"
-                Style="{StaticResource infoLabel}"/>
-            <Label
-                Grid.Column="7"
-                Content="Status"
-                Style="{StaticResource infoLabel}"/>
-
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
         <Separator
             Style="{StaticResource generalSeparatorStyle}"/>

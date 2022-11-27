@@ -16,5 +16,6 @@ namespace BankManagement_WPF.Model
         public float RateOfInterest { get; set; }
         public int LoanDuration { get; set; }
         public string Status { get; set; }
+        public string Comment { get; set; }
     }
 }

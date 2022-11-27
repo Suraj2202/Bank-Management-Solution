@@ -42,7 +42,16 @@ namespace LoginSecurity.Controllers.LoanApply
         {
             List<LoanDetail> loanDetails = await userRepository.GetAllLoanAsync(userName);
             List<LoanDetailDTO> loanDetailDTO = mapper.Map<List<LoanDetailDTO>>(loanDetails);
-
+            return loanDetailDTO;
+        }
+        
+        // GET: api/<ApplyLoanController>
+        [Route("api/[controller]/all")]
+        [HttpGet]
+        public async Task<List<LoanDetailDTO>> Get()
+        {
+            List<LoanDetail> loanDetails = await userRepository.GetAllAdminLoanAsync();
+            List<LoanDetailDTO> loanDetailDTO = mapper.Map<List<LoanDetailDTO>>(loanDetails);
             return loanDetailDTO;
         }
 
