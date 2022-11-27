@@ -11,5 +11,6 @@ namespace LoginSecurity.Repositories
         Task<LoanDetail> GetLoanAsync(int loanId);
         Task<List<LoanDetail>> GetAllLoanAsync(string userName);
         Task<bool> SaveLoanDeatilAsync(LoanDetail loanDetail);
+        Task<bool> UpdateLoanDeatilAsync(int loanId,LoanDetail loanDetail);
     }
 }

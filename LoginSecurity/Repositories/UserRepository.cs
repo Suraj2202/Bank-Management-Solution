@@ -86,5 +86,36 @@ namespace LoginSecurity.Repositories
             }
             return false;
         }
+
+        public async Task<bool> UpdateUserDeatilAsync(string userName, UserDetail userDetail)
+        {
+            try
+            {
+                UserDetail user = await GetUserAsync(userName);
+                if (user != null)
+                {
+
+                    user.Address = userDetail.Address;
+                    user.Contact = userDetail.Contact;
+                    user.Country = userDetail.Country;
+                    user.DOB = userDetail.DOB;
+                    user.Email = userDetail.Email;
+                    user.Name = userDetail.Name;
+                    user.PAN = userDetail.PAN;
+                    user.Password = userDetail.Password;
+                    user.State = userDetail.State;
+
+                    bankManagementDbContext.UserDetails.Update(user);
+                    await bankManagementDbContext.SaveChangesAsync();
+
+                    return true;
+                }
+                return false;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
     }
 }

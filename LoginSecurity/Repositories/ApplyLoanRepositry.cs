@@ -34,7 +34,33 @@ namespace LoginSecurity.Repositories
                 await bankManagementDbContext.SaveChangesAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateLoanDeatilAsync(int loanId, LoanDetail loanDetail)
+        {
+            try
+            {
+                LoanDetail loan = await GetLoanAsync(loanId);
+                if(loan != null)
+                {
+                    loan.LoanAmount = loanDetail.LoanAmount;
+                    loan.LoanDate = loanDetail.LoanDate;
+                    loan.LoanDuration = loanDetail.LoanDuration;
+                    loan.LoanType = loanDetail.LoanType;
+                    loan.RateOfInterest = loanDetail.RateOfInterest;
+
+                    bankManagementDbContext.LoanDetails.Update(loan);
+                    await bankManagementDbContext.SaveChangesAsync();
+                    return true;
+                }
+
+                return false;
+            }
+            catch(Exception)
             {
                 return false;
             }
