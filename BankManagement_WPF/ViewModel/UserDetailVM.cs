@@ -185,7 +185,7 @@ namespace BankManagement_WPF.ViewModel
             if (await SessionHelper.ValidateToken(GlobalVariables.USERNAME))
             {
                 await SessionHelper.LogoutUser(GlobalVariables.USERNAME);
-                Application.Current.Shutdown();
+                Application.Current.Windows[1].Close();
                 return true;
             }
 
