@@ -91,7 +91,7 @@ namespace BankManagement_WPF.ViewModel
             loansWindow.ShowDialog();
         }
 
-        public async void CreateNewLoan()
+        public void CreateNewLoan()
         {
             //validation
             if(string.IsNullOrEmpty(LoanType) || string.IsNullOrEmpty(LoanAmount) || string.IsNullOrEmpty(LoanDate) || string.IsNullOrEmpty(LoanDuration))
@@ -136,7 +136,7 @@ namespace BankManagement_WPF.ViewModel
                 Status = "Pending"
             };
 
-            string status = await ApplyLoanHelper.CreateLoan(loan);
+            string status =  ApplyLoanHelper.CreateLoan(loan);
 
             Warning = status;
         }       
