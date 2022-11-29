@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace BankManagement_WPF.Validations
+namespace BankManagement_WPF.ViewModel
 {
     public class TextBlockValidation
     {

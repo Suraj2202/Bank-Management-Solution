@@ -11,13 +11,18 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-    class LoginSecurityHelper
+    class LoginSecurityHelper :ILoginSecurityHelper
     {
         public const string BASE_URL = "http://localhost:7001/api/";
         public const string GET_URL = "Login/{0}";
         public const string POST_URL = "Login";
 
-        public static async Task<UserDetail> GetUserDetail(string userName)
+        public LoginSecurityHelper()
+        {
+
+        }
+
+        public async Task<UserDetail> GetUserDetail(string userName)
         {
             UserDetail userDetail;
 
@@ -33,7 +38,7 @@ namespace BankManagement_WPF.ViewModel.Helpers
             return userDetail;
         }
 
-        public static async Task<string> LoginAgent(LoginDetail loginDetail)
+        public async Task<string> LoginAgent(LoginDetail loginDetail)
         {
             string agent;
             string URL = BASE_URL + POST_URL;

@@ -182,9 +182,10 @@ namespace BankManagement_WPF.ViewModel
 
         public async Task<bool> Logout()
         {
-            if (await SessionHelper.ValidateToken(GlobalVariables.USERNAME))
+            ISessionHelper sessionHelper = new SessionHelper();
+            if (await sessionHelper.ValidateToken(GlobalVariables.USERNAME))
             {
-                await SessionHelper.LogoutUser(GlobalVariables.USERNAME);
+                await sessionHelper.LogoutUser(GlobalVariables.USERNAME);
                 await Task.Delay(1000);
                 Application.Current.Windows[1].Close();
             }
@@ -195,7 +196,8 @@ namespace BankManagement_WPF.ViewModel
 
         public async void GetUserDetails()
         {
-            var userDetail = await LoginSecurityHelper.GetUserDetail(GlobalVariables.USERNAME);
+            ILoginSecurityHelper loginSecurityHelper = new LoginSecurityHelper();
+            var userDetail = await loginSecurityHelper.GetUserDetail(GlobalVariables.USERNAME);
 
             UserName = userDetail.UserName;
             PassWord = userDetail.Password;

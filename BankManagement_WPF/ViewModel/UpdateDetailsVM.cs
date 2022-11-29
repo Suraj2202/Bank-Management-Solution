@@ -1,5 +1,4 @@
 ﻿using BankManagement_WPF.Model;
-using BankManagement_WPF.Validations;
 using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
@@ -168,7 +167,8 @@ namespace BankManagement_WPF.ViewModel
 
         private async void GetUserDetails()
         {
-            var userDetail = await LoginSecurityHelper.GetUserDetail(GlobalVariables.USERNAME);
+            ILoginSecurityHelper loginSecurity = new LoginSecurityHelper();
+            var userDetail = await loginSecurity.GetUserDetail(GlobalVariables.USERNAME);
 
             UserName = userDetail.UserName;
             PassWord = userDetail.Password;
@@ -245,8 +245,8 @@ namespace BankManagement_WPF.ViewModel
                 Contact = long.Parse(contactNo),
                 DOB = DateTime.Parse(myDate),
             };
-
-            string updateStatus = await UpdateDetailHelper.UpdateUserDetail(GlobalVariables.USERNAME, user);
+            IUpdateDetailHelper update = new UpdateDetailHelper();
+            string updateStatus = await update.UpdateUserDetail(GlobalVariables.USERNAME, user);
 
             Warning = updateStatus;
         }

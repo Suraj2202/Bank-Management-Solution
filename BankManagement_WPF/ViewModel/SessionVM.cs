@@ -21,9 +21,10 @@ namespace BankManagement_WPF.ViewModel
 
         public async Task<bool> Logout()
         {
-            if(await SessionHelper.ValidateToken(GlobalVariables.USERNAME))
+            ISessionHelper session = new SessionHelper();
+            if(await session.ValidateToken(GlobalVariables.USERNAME))
             {
-                await SessionHelper.LogoutUser(GlobalVariables.USERNAME);
+                await session.LogoutUser(GlobalVariables.USERNAME);
                 return true;
             }
 

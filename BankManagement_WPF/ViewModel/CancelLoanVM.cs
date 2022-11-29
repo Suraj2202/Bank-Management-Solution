@@ -22,7 +22,8 @@ namespace BankManagement_WPF.ViewModel
 
         public async void CancelLoanStatus()
         {
-            await UpdateDetailHelper.UpdateLoanStatus(GlobalVariables.LOANID, "Cancel");
+            IUpdateDetailHelper update = new UpdateDetailHelper();
+            await update.UpdateLoanStatus(GlobalVariables.LOANID, "Cancel");
             
         }
     }

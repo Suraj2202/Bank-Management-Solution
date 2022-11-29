@@ -81,7 +81,8 @@ namespace BankManagement_WPF.ViewModel
                 return;
             try
             {
-                string agent = await LoginSecurityHelper.LoginAgent(new LoginDetail { UserName = UserName, Password = PassWord });
+                LoginSecurityHelper securityHelper = new LoginSecurityHelper();
+                string agent = await securityHelper.LoginAgent(new LoginDetail { UserName = UserName, Password = PassWord });
 
                 if (agent == "User")
                 {

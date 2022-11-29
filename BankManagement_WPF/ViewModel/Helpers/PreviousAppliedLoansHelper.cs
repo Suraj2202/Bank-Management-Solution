@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-    class PreviousAppliedLoansHelper
+    class PreviousAppliedLoansHelper :IPreviousAppliedLoansHelper
     {
         public const string BASE_URL = "http://localhost:7001/api/";
         public const string GET_URL = "ApplyLoan/all/{0}";
         public const string ADMIN_GET_URL = "ApplyLoan/all";
 
-        public static async Task<IEnumerable<LoanDetail>> GetUserLoanDetail(string userName)
+
+        public PreviousAppliedLoansHelper()
+        {
+
+        }
+
+        public async Task<IEnumerable<LoanDetail>> GetUserLoanDetail(string userName)
         {
             List<LoanDetail> loanDetail;
             string URL = BASE_URL + string.Format(GET_URL, userName);
@@ -30,7 +36,7 @@ namespace BankManagement_WPF.ViewModel.Helpers
             return loanDetail;
         }
 
-        public static async Task<IEnumerable<LoanDetail>> GetAdminLoanDetail()
+        public async Task<IEnumerable<LoanDetail>> GetAdminLoanDetail()
         {
             List<LoanDetail> loanDetail;
             string URL = BASE_URL + ADMIN_GET_URL;

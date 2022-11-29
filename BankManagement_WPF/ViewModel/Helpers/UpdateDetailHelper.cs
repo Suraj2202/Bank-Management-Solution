@@ -9,16 +9,19 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-    class UpdateDetailHelper
+    class UpdateDetailHelper : IUpdateDetailHelper
     {
         public const string BASE_URL = "http://localhost:7001/api/";
         public const string LOANSTATUS_PUT_URL = "Update/status/{0}";
         public const string LOANCOMMENT_PUT_URL = "Update/comment/{0}";
         public const string USER_PUT_URL = "Update/user/{0}";
 
+        public UpdateDetailHelper()
+        {
 
+        }
 
-        public static async Task<string> UpdateLoanStatus(int loanId, string statusValue)
+        public async Task<string> UpdateLoanStatus(int loanId, string statusValue)
         {
             string agent;
             string URL = BASE_URL + string.Format(LOANSTATUS_PUT_URL, loanId);
@@ -32,7 +35,7 @@ namespace BankManagement_WPF.ViewModel.Helpers
             return agent;
         }
 
-        public static async Task<string> UpdateUserDetail(string username, UserDetail userDetail)
+        public async Task<string> UpdateUserDetail(string username, UserDetail userDetail)
         {
             string agent;
             string URL = BASE_URL + string.Format(USER_PUT_URL, username);
@@ -46,7 +49,7 @@ namespace BankManagement_WPF.ViewModel.Helpers
             return agent;
         }
 
-        public static async Task<string> UpdateLoanComment(int loanId, string commentValue)
+        public async Task<string> UpdateLoanComment(int loanId, string commentValue)
         {
             string agent;
             string URL = BASE_URL + string.Format(LOANCOMMENT_PUT_URL, (long)loanId);

@@ -51,7 +51,8 @@ namespace BankManagement_WPF.ViewModel
         {
             if (!string.IsNullOrEmpty(Comment))
             {
-                await UpdateDetailHelper.UpdateLoanComment(GlobalVariables.LOANID, GlobalVariables.COMMENT);
+                IUpdateDetailHelper update = new UpdateDetailHelper();
+                await update.UpdateLoanComment(GlobalVariables.LOANID, GlobalVariables.COMMENT);
                 Application.Current.Windows[Application.Current.Windows.Count - 2].Close();
             }
             else

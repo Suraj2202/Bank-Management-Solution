@@ -9,12 +9,17 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-    class SignupHelper
+    class SignupHelper : ISignupHelper
     {
         public const string BASE_URL = "http://localhost:7001/api/";
         public const string POST_URL = "Signup";
 
-        public static async Task<string> CreateAccount(UserDetail userDetail)
+        public SignupHelper()
+        {
+
+        }
+
+        public async Task<string> CreateAccount(UserDetail userDetail)
         {
             string agent;
             string URL = BASE_URL + POST_URL;

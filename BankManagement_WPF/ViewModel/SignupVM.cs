@@ -1,5 +1,4 @@
 ﻿using BankManagement_WPF.Model;
-using BankManagement_WPF.Validations;
 using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
@@ -234,7 +233,8 @@ namespace BankManagement_WPF.ViewModel
                 AccountType = AccountType.Split(":")[1].Trim()
             };
 
-            string createAccountStatus = await SignupHelper.CreateAccount(user);
+            ISignupHelper signup = new SignupHelper();
+            string createAccountStatus = await signup.CreateAccount(user);
 
             if (createAccountStatus == "Added Succesfully")
             {

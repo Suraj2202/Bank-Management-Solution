@@ -50,7 +50,8 @@ namespace BankManagement_WPF.ViewModel
 
         public async void CommentCommand()
         {
-            await UpdateDetailHelper.UpdateLoanComment(GlobalVariables.LOANID, GlobalVariables.COMMENT);
+            IUpdateDetailHelper updateDetail = new UpdateDetailHelper();
+            await updateDetail.UpdateLoanComment(GlobalVariables.LOANID, GlobalVariables.COMMENT);
         }
 
         public void OpenCommentWindow()
@@ -60,7 +61,8 @@ namespace BankManagement_WPF.ViewModel
 
         private async void DisplayAllAttributes()
         {
-            var response = await PreviousAppliedLoansHelper.GetAdminLoanDetail();
+            IPreviousAppliedLoansHelper previousAppliedLoans = new PreviousAppliedLoansHelper();
+            var response = await previousAppliedLoans.GetAdminLoanDetail();
             LoanDetails = new BindableCollection<LoanDetail>(response);
         }
 
@@ -72,8 +74,8 @@ namespace BankManagement_WPF.ViewModel
                 System.Windows.MessageBox.Show("Can't Change the Status");
                 return;
             }
-
-            await UpdateDetailHelper.UpdateLoanStatus(GlobalVariables.LOANID, "APPROVED");
+            IUpdateDetailHelper updateDetailHelper = new UpdateDetailHelper();
+            await updateDetailHelper.UpdateLoanStatus(GlobalVariables.LOANID, "APPROVED");
             DisplayAllAttributes();
             GlobalVariables.COMMENT = "";
             new CommentWindow().ShowDialog();
@@ -87,7 +89,8 @@ namespace BankManagement_WPF.ViewModel
                 System.Windows.MessageBox.Show("Can't Change the Status");
                 return;
             }
-            await UpdateDetailHelper.UpdateLoanStatus(GlobalVariables.LOANID, "REJECTED");
+            IUpdateDetailHelper update = new UpdateDetailHelper();
+            await update.UpdateLoanStatus(GlobalVariables.LOANID, "REJECTED");
             DisplayAllAttributes();
             GlobalVariables.COMMENT = "";
             new CommentWindow().ShowDialog();
