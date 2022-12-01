@@ -2,6 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:BankManagement_WPF"
+             xmlns:view="clr-namespace:BankManagement_WPF.View"
+             xmlns:viewModel="clr-namespace:BankManagement_WPF.ViewModel"
              StartupUri="View/LoginWindow.xaml">
     <Application.Resources>
 

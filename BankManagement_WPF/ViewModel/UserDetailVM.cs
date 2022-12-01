@@ -13,6 +13,8 @@ namespace BankManagement_WPF.ViewModel
 {
     public class UserDetailVM : INotifyPropertyChanged
     {
+        
+
         private string name;
 
         public string Name
