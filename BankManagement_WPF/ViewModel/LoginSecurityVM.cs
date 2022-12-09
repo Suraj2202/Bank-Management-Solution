@@ -16,7 +16,16 @@ namespace BankManagement_WPF.ViewModel
 {
     class LoginSecurityVM : INotifyPropertyChanged, INotifyDataErrorInfo
     {
-        private readonly Dictionary<string, List<string>> propertyErrors = new Dictionary<string, List<string>>();
+        //private readonly Dictionary<string, List<string>> propertyErrors;
+        private Dictionary<string, string> propertyErrors;
+        TextBlockValidation textBlockValidation;
+
+        public Dictionary<string, string> PropertyErrors
+        {
+            get { return propertyErrors; }
+            set { propertyErrors = value;}
+        }
+
         private string userName;
 
         public string UserName
@@ -28,13 +37,10 @@ namespace BankManagement_WPF.ViewModel
                 OnPropertyChanged("UserName");
 
                 ClearErrors(nameof(UserName));
+                bool res = textBlockValidation.UserNameValidation(value);                
+                if (res)
+                    AddError(nameof(UserName), "Invalid User Name. It must not contain any Special charachter except underscore(_)");                
 
-                var list = new[] { "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "=", "\"" };
-                bool res = list.Any(value.Contains);
-                if(res)
-                {
-                    AddError(nameof(userName), "Invalid User Name. It must not contain any Special charachter except underscore(_)");
-                }
             }
         }
 
@@ -47,6 +53,13 @@ namespace BankManagement_WPF.ViewModel
             {
                 passWord = value;
                 OnPropertyChanged("PassWord");
+                
+                ClearErrors(nameof(PassWord));
+                bool res = textBlockValidation.PasswordValidation(value);
+                if (res)
+                    AddError(nameof(PassWord), "Password must be inbetween 8-20 and must have 1 Caps, 1 Small and 1 Special character");
+
+
             }
         }
 
@@ -70,7 +83,9 @@ namespace BankManagement_WPF.ViewModel
 
         public LoginSecurityVM()
         {
-            LoginSecurityCommand = new LoginSecurityCommand(this);
+            propertyErrors = new Dictionary<string, string>();
+            textBlockValidation = new TextBlockValidation();
+             LoginSecurityCommand = new LoginSecurityCommand(this);
             SignupCommand = new SignupCommand(this);
         }
 
@@ -117,30 +132,31 @@ namespace BankManagement_WPF.ViewModel
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        //Error Handling
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+
+
+        #region Error Handling
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
         public bool HasErrors => propertyErrors.Any();
 
         public IEnumerable GetErrors(string propertyName)
         {
-            return propertyErrors.GetValueOrDefault(propertyName, new List<string>());
+            return propertyErrors.GetValueOrDefault(propertyName, "");
         }
 
         public void AddError(string propertyName, string errorMessage)
         {
             if(!propertyErrors.ContainsKey(propertyName))
             {
-                propertyErrors.Add(propertyName, new List<string>());
+                propertyErrors.Add(propertyName, errorMessage);
+                OnPropertyChanged("PropertyErrors");
             }
-
-            propertyErrors[propertyName].Add(errorMessage);
             OnErrorsChanged(propertyName);
         }
 
@@ -151,8 +167,11 @@ namespace BankManagement_WPF.ViewModel
 
         private void ClearErrors(string propertyName)
         {
- //           propertyErrors.Clear();
+            propertyErrors.Remove(propertyName);
+            OnPropertyChanged("PropertyErrors");
             OnErrorsChanged(propertyName);
         }
+
+        #endregion
     }
 }

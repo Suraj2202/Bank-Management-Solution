@@ -2,6 +2,7 @@
 using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,8 +11,17 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class SignupVM : INotifyPropertyChanged
+    class SignupVM : INotifyPropertyChanged, INotifyDataErrorInfo
     {
+        private Dictionary<string, string> propertyErrors;
+        TextBlockValidation textBlockValidation;
+
+        #region Value Property
+        public Dictionary<string, string> PropertyErrors
+        {
+            get { return propertyErrors; }
+            set { propertyErrors = value; }
+        }
 
         private string name;
 
@@ -33,7 +43,13 @@ namespace BankManagement_WPF.ViewModel
             set
             {
                 userName = value;
-                OnPropertyChanged("userName");
+                OnPropertyChanged("UserName");
+
+                ClearErrors(nameof(UserName));
+                bool res = textBlockValidation.UserNameValidation(value);
+                if (res)
+                    AddError(nameof(UserName), "Invalid User Name. It must not contain any Special charachter except underscore(_)");
+
             }
         }
 
@@ -46,6 +62,12 @@ namespace BankManagement_WPF.ViewModel
             {
                 password = value;
                 OnPropertyChanged("PassWord");
+
+                ClearErrors(nameof(PassWord));
+                bool res = textBlockValidation.PasswordValidation(value);
+                if (res)
+                    AddError(nameof(PassWord), "Password must be inbetween 8-20 and must have 1 Caps, 1 Small and 1 Special character");
+
             }
         }
 
@@ -58,6 +80,9 @@ namespace BankManagement_WPF.ViewModel
             {
                 address = value;
                 OnPropertyChanged("Address");
+
+                ClearErrors(nameof(Address));
+
             }
         }
 
@@ -70,6 +95,9 @@ namespace BankManagement_WPF.ViewModel
             {
                 state = value;
                 OnPropertyChanged("State");
+                
+                ClearErrors(nameof(State));
+
             }
         }
 
@@ -82,6 +110,9 @@ namespace BankManagement_WPF.ViewModel
             {
                 country = value;
                 OnPropertyChanged("Country");
+
+                ClearErrors(nameof(Country));
+
             }
         }
 
@@ -94,6 +125,12 @@ namespace BankManagement_WPF.ViewModel
             {
                 emailId = value;
                 OnPropertyChanged("EmailId");
+
+                ClearErrors(nameof(EmailId));
+                bool res = textBlockValidation.EmailIDValidation(value);
+                if (res)
+                    AddError(nameof(EmailId), "Invalid Email ID");
+
             }
         }
 
@@ -106,6 +143,12 @@ namespace BankManagement_WPF.ViewModel
             {
                 pan = value;
                 OnPropertyChanged("PAN");
+
+                ClearErrors(nameof(PAN));
+                bool res = textBlockValidation.PANandContactNoValidation(value);
+                if (res)
+                    AddError(nameof(PAN), "Invalid PAN Number, 1st digit should not be 0 and must have 10 digits.");
+
             }
         }
 
@@ -118,6 +161,12 @@ namespace BankManagement_WPF.ViewModel
             {
                 contactNo = value;
                 OnPropertyChanged("ContactNo");
+
+                ClearErrors(nameof(ContactNo));
+                bool res = textBlockValidation.PANandContactNoValidation(value);
+                if (res)
+                    AddError(nameof(ContactNo), "Invalid Contact Number, 1st digit should not be 0 and must have 10 digits.");
+
             }
         }
 
@@ -133,6 +182,12 @@ namespace BankManagement_WPF.ViewModel
             {
                 dob = value;
                 OnPropertyChanged("DOB");
+
+                ClearErrors(nameof(DOB));
+                bool res = textBlockValidation.AgeGreaterThan18(value);
+                if (res)
+                    AddError(nameof(DOB), "No Future Date Please and Age > 18.");
+
             }
         }
 
@@ -156,13 +211,14 @@ namespace BankManagement_WPF.ViewModel
             set { warning = value; OnPropertyChanged("Warning"); }
         }
 
-
         public CreateAccountCommand CreateAccountCommand { get; set; }
-        
-        TextBlockValidation textBlockValidation;
+
+        #endregion
+
 
         public SignupVM()
         {
+            propertyErrors = new Dictionary<string, string>();
             EndDate = DateTime.Now.ToString("dd/MM/yyyy");
             CreateAccountCommand = new CreateAccountCommand(this);
             textBlockValidation = new TextBlockValidation();
@@ -170,7 +226,18 @@ namespace BankManagement_WPF.ViewModel
 
         public async void CreateNewAccount()
         {
-            //Validation:
+            #region Validation:
+
+            CheckForIsNullOrEmpty(nameof(Name), Name);
+            CheckForIsNullOrEmpty(nameof(UserName), UserName);
+            CheckForIsNullOrEmpty(nameof(PassWord), PassWord);
+            CheckForIsNullOrEmpty(nameof(Address), Address);
+            CheckForIsNullOrEmpty(nameof(State), State);
+            CheckForIsNullOrEmpty(nameof(Country), Country);
+            CheckForIsNullOrEmpty(nameof(EmailId), EmailId);
+            CheckForIsNullOrEmpty(nameof(PAN), PAN);
+            CheckForIsNullOrEmpty(nameof(ContactNo), ContactNo);
+            CheckForIsNullOrEmpty(nameof(DOB), DOB);
 
             if (string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(PassWord) || string.IsNullOrEmpty(EmailId) || string.IsNullOrEmpty(PAN) || string.IsNullOrEmpty(ContactNo) || string.IsNullOrEmpty(DOB))
             {
@@ -184,25 +251,25 @@ namespace BankManagement_WPF.ViewModel
                 return;
             }
 
-            if(!textBlockValidation.PasswordValidation(PassWord))
+            if(textBlockValidation.PasswordValidation(PassWord))
             {
                 Warning = "Password must be inbetween 8-20 and must have 1 Caps, 1 Small and 1 Special character";
                 return;
             }
 
-            if(!textBlockValidation.EmailIDValidation(EmailId))
+            if(textBlockValidation.EmailIDValidation(EmailId))
             {
                 Warning = "Invalid Email ID";
                 return;
             }
 
-            if (!textBlockValidation.PANandContactNoValidation(PAN))
+            if (textBlockValidation.PANandContactNoValidation(PAN))
             {
                 Warning = "Invalid PAN Number, 1st digit should not be 0 and must have 10 digits.";
                 return;
             }
 
-            if (!textBlockValidation.PANandContactNoValidation(ContactNo))
+            if (textBlockValidation.PANandContactNoValidation(ContactNo))
             {
                 Warning = "Invalid Contact Number, 1st digit should not be 0 and must have 10 digits.";
                 return;
@@ -213,6 +280,8 @@ namespace BankManagement_WPF.ViewModel
                 Warning = "No Future Date Please and Age > 18.";
                 return;
             }
+
+            #endregion
 
             string val = DOB.Contains("-") ? "-" : "/";
             string[] dates= DOB.Split(" ")[0].Split(val);
@@ -239,17 +308,19 @@ namespace BankManagement_WPF.ViewModel
             if (createAccountStatus == "Added Succesfully")
             {
                 Warning = "Your Account Created Successfully";
+                System.Windows.MessageBox.Show(Warning);
             }
             else if (createAccountStatus == "User Already Exists")
             {
                 Warning = "User Name is already taken";
+                System.Windows.MessageBox.Show(Warning);
             }
             else
             {
                 Warning = "Something went wrong !!!";
+                System.Windows.MessageBox.Show(Warning);
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -257,5 +328,49 @@ namespace BankManagement_WPF.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #region Error Handling
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        public bool HasErrors => propertyErrors.Any();
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return propertyErrors.GetValueOrDefault(propertyName, "");
+        }
+
+        public void AddError(string propertyName, string errorMessage)
+        {
+            if (!propertyErrors.ContainsKey(propertyName))
+            {
+                propertyErrors.Add(propertyName, errorMessage);
+                OnPropertyChanged("PropertyErrors");
+            }
+            OnErrorsChanged(propertyName);
+        }
+
+        private void OnErrorsChanged(string propertName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertName));
+        }
+
+        private void ClearErrors(string propertyName)
+        {
+            propertyErrors?.Remove(propertyName);
+            OnPropertyChanged("PropertyErrors");
+            OnErrorsChanged(propertyName);
+        }
+
+        private void CheckForIsNullOrEmpty(string propertyName, string propertyValue)
+        {
+            if (string.IsNullOrEmpty(propertyValue))
+            {
+                ClearErrors(propertyName);
+                AddError(propertyName, propertyName + "Field is mandatory.");
+            }
+        }
+
+        #endregion
     }
 }

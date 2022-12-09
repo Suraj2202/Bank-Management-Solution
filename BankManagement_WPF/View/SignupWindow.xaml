@@ -8,7 +8,7 @@
         xmlns:components="clr-namespace:BankManagement_WPF.View.Components"
         Background="LightGoldenrodYellow"
         mc:Ignorable="d"
-        Title="Create Your Account" Height="650" Width="400">
+        Title="Create Your Account" Height="650" Width="400" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <vm:SignupVM x:Key="SignupVm"/>
@@ -18,58 +18,67 @@
         DataContext="{StaticResource SignupVm}"
         Margin="10">
 
-        <Label
-            
+        <Label            
             Content="Name"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[Name]}"/>
         
         <Label
             Content="User Name"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox  Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[UserName]}"/>
         
         <Label
             Content="Password"
             Style ="{StaticResource generalLabelStyle}"/>
-        <components:PasswordBoxControl  Password="{Binding PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <components:PasswordBoxControl  Password="{Binding PassWord, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[PassWord]}"/>
         
         <Label
             Content="Address"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox  Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[Address]}"/>
         
         <Label
             Content="State"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox  Text="{Binding State, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[State]}"/>
         
         <Label
             Content="Country"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox  Text="{Binding Country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[Country]}"/>
         
         <Label
             Content="Email ID"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding EmailId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox  Text="{Binding EmailId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[EmailId]}"/>
         
         <Label
             Content="PAN Number"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding PAN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox  Text="{Binding PAN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[PAN]}"/>
         
         <Label
             Content="Contact Number"
             Style ="{StaticResource generalLabelStyle}"/>
-        <TextBox  Text="{Binding ContactNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox  Text="{Binding ContactNo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[ContactNo]}"/>
         
         <Label
             Content="Date Of Birth"
             Style ="{StaticResource generalLabelStyle}"/>
         <DatePicker
             SelectedDateFormat="Short"  
-            SelectedDate="{Binding DOB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            SelectedDate="{Binding DOB, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding PropertyErrors[DOB]}"/>
         
         <Label
             Content="Account Type"

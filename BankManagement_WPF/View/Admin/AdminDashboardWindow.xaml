@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BankManagement_WPF.View.Admin"
         xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
         mc:Ignorable="d"
-        Title="Admin Dashboard" Height="450" Width="800">
+        Title="Admin Dashboard" WindowState="Maximized">
 
     <Window.Resources>
         <vm:AdminDashboardVM x:Key="AdminDashboardVm"/>
