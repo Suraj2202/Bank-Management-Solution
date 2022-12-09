@@ -32,6 +32,8 @@ namespace BankManagement_WPF.ViewModel
             {
                 name = value;
                 OnPropertyChanged("Name");
+
+                ClearErrors(nameof(Name));
             }
         }
 
@@ -367,7 +369,7 @@ namespace BankManagement_WPF.ViewModel
             if (string.IsNullOrEmpty(propertyValue))
             {
                 ClearErrors(propertyName);
-                AddError(propertyName, propertyName + "Field is mandatory.");
+                AddError(propertyName, propertyName + " Field is mandatory.");
             }
         }
 

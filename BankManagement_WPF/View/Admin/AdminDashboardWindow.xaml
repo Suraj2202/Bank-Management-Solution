@@ -54,7 +54,15 @@
                 AlternatingRowBackground="Orange"
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
-                CanUserSortColumns="True">
+                CanUserSortColumns="True"
+                
+                ScrollViewer.CanContentScroll="True"                
+                BorderBrush="#000" 
+                BorderThickness="1"
+                Height="480" 
+                MaxHeight="480"
+                ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Loan Id" Width="auto" Binding="{Binding LoanId}"/>
                     <DataGridTextColumn Header="Loan Type" Width="*" Binding="{Binding LoanType}"/>

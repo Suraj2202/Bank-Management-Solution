@@ -3,13 +3,24 @@ using BankManagement_WPF.View;
 using BankManagement_WPF.ViewModel.Commands;
 using BankManagement_WPF.ViewModel.Helpers;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class ApplyLoanVM : INotifyPropertyChanged
+    class ApplyLoanVM : INotifyPropertyChanged, INotifyDataErrorInfo
     {
+        private Dictionary<string, string> propertyErrors;
+        TextBlockValidation textBlockValidation;
+
+        #region Value Property
+        public Dictionary<string, string> PropertyErrors
+        {
+            get { return propertyErrors; }
+            set { propertyErrors = value; }
+        }
 
         private string loanType;
 
@@ -28,7 +39,15 @@ namespace BankManagement_WPF.ViewModel
         public string LoanAmount
         {
             get { return loanAmount; }
-            set { loanAmount = value; OnPropertyChanged("LoanAmount"); }
+            set 
+            { 
+                loanAmount = value;
+                OnPropertyChanged("LoanAmount");
+
+                ClearErrors(nameof(LoanAmount));
+                if (LoanAmount.Any(char.IsLetter) || LoanAmount.Any(char.IsSymbol) || LoanAmount.Any(char.IsPunctuation))
+                    AddError(nameof(LoanAmount), "Loan Amount should be numbers only");
+            }
         }
 
         private string loanDate;
@@ -36,7 +55,17 @@ namespace BankManagement_WPF.ViewModel
         public string LoanDate
         {
             get { return loanDate; }
-            set { loanDate = value; OnPropertyChanged("LoanDate"); }
+            set 
+            { 
+                loanDate = value; 
+                OnPropertyChanged("LoanDate");
+
+                ClearErrors(nameof(LoanDate));
+                bool res = textBlockValidation.FutureDateValidation(value);
+                if (res)
+                    AddError(nameof(LoanDate), "No Future Date Please.");
+
+            }
         }
 
         private string roi;
@@ -58,6 +87,10 @@ namespace BankManagement_WPF.ViewModel
                 float duration = float.Parse(LoanDuration);
                 ROI = (duration / 12).ToString(); 
                 OnPropertyChanged("LoanDuration");
+
+                ClearErrors(nameof(LoanDuration));
+                if (LoanDuration.Any(char.IsLetter) || LoanDuration.Any(char.IsSymbol) || LoanDuration.Any(char.IsPunctuation))
+                    AddError(nameof(LoanDuration), "Loan Duration should be numbers only");
             }
         }
 
@@ -69,19 +102,20 @@ namespace BankManagement_WPF.ViewModel
             set { warning = value; OnPropertyChanged("Warning"); }
         }
 
-        TextBlockValidation textBlockValidation;
-        
+        #endregion
+
         public ApplyLoanCommand ApplyLoanCommand { get; set; }
         public PreviousAppliedLoansCommand PreviousAppliedLoansCommand { get; set; }
 
         public ApplyLoanVM()
         {
+            propertyErrors = new Dictionary<string, string>();
+            textBlockValidation = new TextBlockValidation();
             //Session Check
             LoanDate = DateTime.Today.ToString("MM/dd/yyyy").Replace('-','/');
             ROI = "0";
             PreviousAppliedLoansCommand = new PreviousAppliedLoansCommand(this);
             ApplyLoanCommand = new ApplyLoanCommand(this);
-            textBlockValidation = new TextBlockValidation();
         }
 
         public void PreviousAppliedLoanWindowOpen()
@@ -93,7 +127,11 @@ namespace BankManagement_WPF.ViewModel
         public async void CreateNewLoan()
         {
             //validation
-            if(string.IsNullOrEmpty(LoanType) || string.IsNullOrEmpty(LoanAmount) || string.IsNullOrEmpty(LoanDate) || string.IsNullOrEmpty(LoanDuration))
+            CheckForIsNullOrEmpty(nameof(LoanAmount), LoanAmount);
+            CheckForIsNullOrEmpty(nameof(LoanDate), LoanDate);
+            CheckForIsNullOrEmpty(nameof(LoanDuration), LoanDuration);
+
+            if (string.IsNullOrEmpty(LoanType) || string.IsNullOrEmpty(LoanAmount) || string.IsNullOrEmpty(LoanDate) || string.IsNullOrEmpty(LoanDuration))
             {
                 Warning = "All fields are mandatory";
                 return;
@@ -147,5 +185,49 @@ namespace BankManagement_WPF.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        #region Error Handling
+
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        public bool HasErrors => propertyErrors.Any();
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            return propertyErrors.GetValueOrDefault(propertyName, "");
+        }
+
+        public void AddError(string propertyName, string errorMessage)
+        {
+            if (!propertyErrors.ContainsKey(propertyName))
+            {
+                propertyErrors.Add(propertyName, errorMessage);
+                OnPropertyChanged("PropertyErrors");
+            }
+            OnErrorsChanged(propertyName);
+        }
+
+        private void OnErrorsChanged(string propertName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertName));
+        }
+
+        private void ClearErrors(string propertyName)
+        {
+            propertyErrors?.Remove(propertyName);
+            OnPropertyChanged("PropertyErrors");
+            OnErrorsChanged(propertyName);
+        }
+
+        private void CheckForIsNullOrEmpty(string propertyName, string propertyValue)
+        {
+            if (string.IsNullOrEmpty(propertyValue))
+            {
+                ClearErrors(propertyName);
+                AddError(propertyName, propertyName + " Field is mandatory.");
+            }
+        }
+
+        #endregion
     }
 }

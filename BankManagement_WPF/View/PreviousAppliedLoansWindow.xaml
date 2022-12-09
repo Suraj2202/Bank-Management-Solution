@@ -35,7 +35,6 @@
             Margin="0,0,10,0"
             Style="{StaticResource generalSeparatorStyle}"/>
 
-
         <Grid
             Margin="10">
             <DataGrid
@@ -44,7 +43,15 @@
                 AutoGenerateColumns="False"
                 AlternatingRowBackground="Orange"
                 CanUserAddRows="False"
-                CanUserDeleteRows="False">
+                CanUserDeleteRows="False"
+                
+                ScrollViewer.CanContentScroll="True"                
+                BorderBrush="#000" 
+                BorderThickness="1"
+                Height="480" 
+                MaxHeight="480"
+                ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                ScrollViewer.VerticalScrollBarVisibility="Auto">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Loan Id" Width="auto" Binding="{Binding LoanId}"/>
@@ -67,7 +74,7 @@
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                
+
                                 <Grid
                                     DataContext="{StaticResource PreviousAppliedLoansVm}">
                                     <Button
@@ -79,17 +86,16 @@
                                     BorderThickness="0"
                                     />
                                 </Grid>
-                                
+
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
-                
+
             </DataGrid>
 
 
         </Grid>
-
 
     </StackPanel>
 </Window>

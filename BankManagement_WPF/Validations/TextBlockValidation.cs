@@ -38,6 +38,8 @@ namespace BankManagement_WPF.ViewModel
 
         public bool FutureDateValidation(string date)
         {
+            if (string.IsNullOrEmpty(date))
+                return false;
             string val = date.Contains("-") ? "-" : "/";
             string[] dates = date.Split(" ")[0].Split(val);
             string myDate = dates[1] + "-" + dates[0] + "-" + dates[2];

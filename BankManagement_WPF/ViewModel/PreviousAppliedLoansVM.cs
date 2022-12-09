@@ -44,7 +44,8 @@ namespace BankManagement_WPF.ViewModel
 
         private async void ExecutableCancelCommand(BindableCollection<LoanDetail> obj)
         {
-            string checkValue = LoanDetails[GlobalVariables.LOANID - 1].Status;
+            int pos = GlobalVariables.LOANID > 1000 ? GlobalVariables.LOANID - 1001 : GlobalVariables.LOANID - 1;
+            string checkValue = LoanDetails[pos].Status;
             if (checkValue != "Pending")
             {
                 System.Windows.MessageBox.Show("Can't Change the Status");

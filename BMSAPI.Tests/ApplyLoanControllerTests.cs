@@ -21,18 +21,7 @@ namespace BMSAPI.Tests
 
         public ApplyLoanControllerTests()
         {
-            loanDetail_one = new LoanDetail()
-            {
-                LoanId = 1,
-                LoanAmount = 100000,
-                LoanDate = new DateTime(2022, 1, 1),
-                LoanDuration = 6,
-                LoanType = "Car",
-                Comment = "",
-                RateOfInterest = 10,
-                Status = "Pending",
-                UserName = "test"
-            };
+            loanDetail_one = TestData.LoanDetail;
 
         }
 

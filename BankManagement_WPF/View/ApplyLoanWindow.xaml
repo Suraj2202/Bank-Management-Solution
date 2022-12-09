@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:BankManagement_WPF.ViewModel"
         Background="LightCyan"
         mc:Ignorable="d"
-        Title="Apply Loan" Height="450" Width="400">
+        Title="Apply Loan" Height="450" Width="400" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <vm:ApplyLoanVM x:Key="ApplyLoanVm"/>
@@ -27,12 +27,11 @@
             Content="Previous Applied Loan"
             HorizontalAlignment="Right"
             Margin="0,5,15,0"
+            Style="{StaticResource dashboardButtonStyle}"
             BorderThickness="3"
-            BorderBrush="GreenYellow"
-            Background="LightCyan"
-            Foreground="Purple"
+            BorderBrush="Orange"
             FontWeight="SemiBold"
-            FontSize="14"
+            FontSize="14"            
             Command="{Binding PreviousAppliedLoansCommand}"/>
 
         <StackPanel
@@ -57,14 +56,16 @@
             Content="Loan Amount"
             Style ="{StaticResource generalLabelStyle}"/>
             <TextBox 
-                Text="{Binding LoanAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding LoanAmount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{Binding PropertyErrors[LoanAmount]}"/>
 
             <Label
             Content="Loan Date"
             Style ="{StaticResource generalLabelStyle}"/>
             <DatePicker
                 SelectedDateFormat="Short"
-                SelectedDate="{Binding LoanDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                SelectedDate="{Binding LoanDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{Binding PropertyErrors[LoanDate]}"/>
             
             <Label
             Content="ROI % (based on Loan Duration)"
@@ -78,13 +79,15 @@
             Content="Duration OF Loan (in Months)"
             Style ="{StaticResource generalLabelStyle}"/>
             <TextBox
-                Text="{Binding LoanDuration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding LoanDuration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{Binding PropertyErrors[LoanDuration]}"/>
 
             <Button
                 Command="{Binding ApplyLoanCommand}"
                 Content="Apply"
                 Margin="10"
-                Style="{StaticResource generalButtonStyle}"/>
+                Style="{StaticResource dashboardButtonStyle}"
+                FontSize="14"/>
         </StackPanel>
         
         <Label
