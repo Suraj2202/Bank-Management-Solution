@@ -18,7 +18,27 @@ namespace WPF.Tests
         [SetUp]
         public void Setup()
         {
+            commentVM = new CommentVM();
+            commentCloseCommand = new CommentCloseCommand(commentVM);
+        }
 
+        [Test]
+        public void CloseWindow_WithoutComment_Test()
+        {
+            commentCloseCommand.CanExecute(null);
+            commentCloseCommand.Execute(null);
+
+            Assert.IsNotNull(commentVM.Warning);
+        }
+
+        [Test]
+        public void CloseWindow_WithComment_Test()
+        {
+            commentVM.Comment = "Not a problem";
+            commentCloseCommand.CanExecute(null);
+            commentCloseCommand.Execute(null);
+
+            Assert.IsNull(commentVM.Warning);
         }
     }
 }
