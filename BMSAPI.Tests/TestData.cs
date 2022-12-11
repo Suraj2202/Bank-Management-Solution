@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BMSAPI.Tests
 {
-    class TestData
+    public class TestData
     {
         private static UserDetail userDetail;
 

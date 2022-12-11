@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class ApplyLoanVM : INotifyPropertyChanged, INotifyDataErrorInfo
+    public class ApplyLoanVM : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private Dictionary<string, string> propertyErrors;
         TextBlockValidation textBlockValidation;
@@ -84,7 +84,8 @@ namespace BankManagement_WPF.ViewModel
             set
             { 
                 loanDuration = value;
-                float duration = float.Parse(LoanDuration);
+                float duration;
+                float.TryParse(LoanDuration, out duration);
                 ROI = (duration / 12).ToString(); 
                 OnPropertyChanged("LoanDuration");
 

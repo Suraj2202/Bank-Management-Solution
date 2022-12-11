@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    class ApplyLoanCommand : ICommand
+    public class ApplyLoanCommand : ICommand
     {
         public ApplyLoanVM VM { get; set; }
 

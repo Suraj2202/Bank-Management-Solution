@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-    class ApplyLoanHelper : IApplyLoanHelper
+    public class ApplyLoanHelper : IApplyLoanHelper
     {
         public const string BASE_URL = "http://localhost:7001/api/";
         public const string POST_URL = "ApplyLoan";

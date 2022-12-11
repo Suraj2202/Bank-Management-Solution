@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.Model
 {
-    class LoanDetail
+    public class LoanDetail
     {
         public int LoanId { get; set; }
         public string UserName { get; set; }

@@ -5,13 +5,18 @@ namespace LoginSecurity.Data
 {
     public class BankManagementDbContext : DbContext
     {
+        public BankManagementDbContext()
+        {
+
+        }
+
         public BankManagementDbContext(DbContextOptions<BankManagementDbContext> options) : base(options)
         {
 
         }
 
-        public DbSet<UserDetail> UserDetails { get; set; }
-        public DbSet<LoanDetail> LoanDetails { get; set; }
+        public virtual DbSet<UserDetail> UserDetails { get; set; }
+        public virtual DbSet<LoanDetail> LoanDetails { get; set; }
 
         /*protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

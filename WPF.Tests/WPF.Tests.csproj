@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BankManagement_WPF\BankManagement_WPF.csproj" />
+    <ProjectReference Include="..\BMSAPI.Tests\BMSAPI.Tests.csproj" />
   </ItemGroup>
 
 </Project>

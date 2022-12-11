@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-     interface IApplyLoanHelper
+     public interface IApplyLoanHelper
     {
-        Task<string> CreateLoan(LoanDetail loanDetail);
+       Task<string> CreateLoan(LoanDetail loanDetail);
     }
 }

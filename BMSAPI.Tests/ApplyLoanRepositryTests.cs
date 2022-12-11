@@ -2,8 +2,10 @@ using LoginSecurity.Data;
 using LoginSecurity.Models.Domains;
 using LoginSecurity.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace BMSAPI.Tests
@@ -11,45 +13,57 @@ namespace BMSAPI.Tests
     [TestFixture]
     public class ApplyLoanRepositryTests
     {
-        private LoanDetail loanDetail_one;
-
+        private List<LoanDetail> loanDetail_list = new List<LoanDetail>() { TestData.LoanDetail };
+        private Mock<BankManagementDbContext> mockBankDbContext;
+        private Mock<DbSet<LoanDetail>> mockLoanDetailDbSet;
+        private IApplyLoanRepositry applyLoanRepositry;
 
         public ApplyLoanRepositryTests()
+        {           
+        }
+
+        [SetUp]
+        public void Setup()
         {
-            loanDetail_one = TestData.LoanDetail;            
+            var data = loanDetail_list.AsQueryable();
+            mockBankDbContext = new Mock<BankManagementDbContext>();
+            mockLoanDetailDbSet = new Mock<DbSet<LoanDetail>>();
+            mockLoanDetailDbSet.As<IQueryable<LoanDetail>>().Setup(m => m.Provider).Returns(data.Provider);
+            mockLoanDetailDbSet.As<IQueryable<LoanDetail>>().Setup(m => m.ElementType).Returns(data.ElementType);
+            mockLoanDetailDbSet.As<IQueryable<LoanDetail>>().Setup(m => m.Expression).Returns(data.Expression);
+            mockLoanDetailDbSet.As<IQueryable<LoanDetail>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
+            mockBankDbContext.Setup(x => x.LoanDetails).Returns(mockLoanDetailDbSet.Object);
+            applyLoanRepositry = new ApplyLoanRepositry(mockBankDbContext.Object);
         }
 
         [Test]
-        public void SaveLoanDeatilAsync_Success_CheckValueFromDb()
+        public void GetLoanAsync_Test()
         {
-            
+            int loanId = loanDetail_list.FirstOrDefault().LoanId;
+
+            var res = applyLoanRepositry.GetLoanAsync(loanId);
+
+            Assert.IsTrue(res.IsCompleted);
         }
 
         [Test]
-        public void SaveLoanDeatilAsync_Fail_CheckValueFromDb()
+        public void GetAllLoanAsync_Test()
         {
-            //arrange
-            var options = new DbContextOptionsBuilder<BankManagementDbContext>()
-                .UseInMemoryDatabase("tempLoan").Options;
+            string username = loanDetail_list.FirstOrDefault().UserName;
 
-            //act
-            using (var context = new BankManagementDbContext(options))
-            {
-                var repo = new ApplyLoanRepositry(context);
-                _ = repo.SaveLoanDeatilAsync(loanDetail_one);
-            }
+            var res = applyLoanRepositry.GetAllLoanAsync(username);
 
-            //assert
-            using (var context = new BankManagementDbContext(options))
-            {
-                var loanFromDb = context.LoanDetails.FirstOrDefault(x => x.LoanId == loanDetail_one.LoanId);
-                Assert.AreEqual(loanDetail_one.LoanId, loanFromDb.LoanId);
-                Assert.AreEqual(loanDetail_one.LoanAmount, loanFromDb.LoanAmount);
-                Assert.AreEqual(loanDetail_one.LoanDate, loanFromDb.LoanDate);
-                Assert.AreEqual(loanDetail_one.LoanDuration, loanFromDb.LoanDuration);
-                Assert.AreEqual(loanDetail_one.LoanType, loanFromDb.LoanType);
-                Assert.AreEqual(loanDetail_one.UserName, loanFromDb.UserName);
-            }
+            Assert.IsTrue(res.IsCompleted);
         }
+
+
+        //Task<LoanDetail> GetLoanAsync(int loanId);
+        //Task<List<LoanDetail>> GetAllLoanAsync(string userName);
+        //Task<List<LoanDetail>> GetAllAdminLoanAsync();
+        //Task<bool> SaveLoanDeatilAsync(LoanDetail loanDetail);
+        //Task<bool> UpdateLoanDeatilAsync(int loanId, LoanDetail loanDetail);
+        //Task<bool> UpdateLoanStatusAsync(int loanId, string status);
+        //Task<bool> UpdateLoanCommentAsync(int loanId, string comment);
+
     }
 }
