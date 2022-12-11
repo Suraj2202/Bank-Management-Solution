@@ -48,13 +48,13 @@ namespace WPF.Tests
             adminDashboardVM.LoanDetails = new BindableCollection<LoanDetail>(loanList);
 
             GlobalVariables.LOANID = TestData.LoanDetail.LoanId;
-
+            approveCommand.CanExecute(null);
             approveCommand.Execute(null);
 
             Assert.IsNotNull(adminDashboardVM.LoanDetails);
         }
 
-        [Test]
+        /*[Test]
         [Ignore("Show Box")]
         public void ApproveCommand_Fail_Test()
         {
@@ -68,7 +68,7 @@ namespace WPF.Tests
 
             Assert.IsNotNull(adminDashboardVM.LoanDetails);
         }
-
+*/
         [Test]
         public void RejectCommand_Test()
         {
@@ -83,7 +83,7 @@ namespace WPF.Tests
 
             Assert.IsNotNull(adminDashboardVM.LoanDetails);
         }
-
+/*
         [Test]
         [Ignore("Show Box")]
         public void RejectCommand_Fail_Test()
@@ -97,7 +97,7 @@ namespace WPF.Tests
             adminDashboardVM.RejectCommand();
             Assert.IsNotNull(adminDashboardVM.LoanDetails);
         }
-
+*/
         [Test]
         public void Search_Test()
         {
