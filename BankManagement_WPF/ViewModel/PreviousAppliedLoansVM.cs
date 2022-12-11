@@ -14,7 +14,7 @@ using System.Windows.Controls;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class PreviousAppliedLoansVM : INotifyPropertyChanged
+    public class PreviousAppliedLoansVM : INotifyPropertyChanged
     {
 
         private string userName;

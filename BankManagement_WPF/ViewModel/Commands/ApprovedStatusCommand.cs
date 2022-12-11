@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    class ApprovedStatusCommand : ICommand
+    public class ApprovedStatusCommand : ICommand
     {
         public AdminDashboardVM VM { get; set; }
 

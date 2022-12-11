@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class SignupVM : INotifyPropertyChanged, INotifyDataErrorInfo
+    public class SignupVM : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         private Dictionary<string, string> propertyErrors;
         TextBlockValidation textBlockValidation;

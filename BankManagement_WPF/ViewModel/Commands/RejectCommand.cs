@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    class RejectCommand : ICommand
+    public class RejectCommand : ICommand
     {
         public AdminDashboardVM VM { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.Model.RequestData
 {
-    class LoginDetail
+    public class LoginDetail
     {
         public string UserName { get; set; }
         public string Password { get; set; }

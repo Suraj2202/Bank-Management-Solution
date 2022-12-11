@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    class SignupCommand : ICommand
+    public class SignupCommand : ICommand
     {
         public LoginSecurityVM VM { get; set; }
 

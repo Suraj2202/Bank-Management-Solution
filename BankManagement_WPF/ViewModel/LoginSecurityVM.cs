@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class LoginSecurityVM : INotifyPropertyChanged, INotifyDataErrorInfo
+    public class LoginSecurityVM : INotifyPropertyChanged, INotifyDataErrorInfo
     {
         //private readonly Dictionary<string, List<string>> propertyErrors;
         private Dictionary<string, string> propertyErrors;

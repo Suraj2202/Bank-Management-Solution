@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    class LogoutCommand : ICommand
+    public class LogoutCommand : ICommand
     {
 
         public LogoutCommand()

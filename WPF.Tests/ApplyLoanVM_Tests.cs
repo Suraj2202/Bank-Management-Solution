@@ -14,6 +14,7 @@ using System.Net.Http.Json;
 using Moq.Protected;
 using System.Net;
 using System.Threading;
+using BankManagement_WPF.ViewModel.Commands;
 
 namespace WPF.Tests
 {
@@ -22,12 +23,12 @@ namespace WPF.Tests
     {        
         private ApplyLoanVM applyLoanVM;
         private Mock<IApplyLoanHelper> mockApplyLoanHelper;
-        
+        private ApplyLoanCommand applyLoanCommand;
         /*
-        private Mock<HttpClient> mockHttpClient;
-        private Mock<HttpResponseMessage> mockMessage;
-        private MockRepository _mockRepository;
-        private Mock<HttpMessageHandler> _handlerMock;
+
+                private Mock<HttpResponseMessage> mockMessage;
+                private MockRepository _mockRepository;
+                private Mock<HttpMessageHandler> _handlerMock;
         */
 
         [SetUp]
@@ -37,6 +38,7 @@ namespace WPF.Tests
             mockApplyLoanHelper = new Mock<IApplyLoanHelper>();
             mockApplyLoanHelper.Setup(x => x.CreateLoan(It.IsAny<LoanDetail>()))
                 .ReturnsAsync("Added Succesfully");
+
 
             /*
               _mockRepository = new(MockBehavior.Default);
@@ -82,7 +84,9 @@ namespace WPF.Tests
         [Test]
         public void CreateNewLoan_Test()
         {
-            applyLoanVM.CreateNewLoan();
+            applyLoanCommand = new ApplyLoanCommand(applyLoanVM);
+            applyLoanCommand.CanExecute(null);
+            applyLoanCommand.Execute(null);
 
             Assert.NotNull(applyLoanVM.ROI);
         }

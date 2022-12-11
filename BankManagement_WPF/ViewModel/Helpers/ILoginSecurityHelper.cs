@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-    interface ILoginSecurityHelper
+    public interface ILoginSecurityHelper
     {
          Task<UserDetail> GetUserDetail(string userName);
          Task<string> LoginAgent(LoginDetail loginDetail);

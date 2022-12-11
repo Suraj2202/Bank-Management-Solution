@@ -15,7 +15,7 @@ using System.Windows.Media;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class AdminDashboardVM : INotifyPropertyChanged
+    public class AdminDashboardVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

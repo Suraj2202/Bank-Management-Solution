@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel
 {
-    class SessionVM : INotifyPropertyChanged
+    public class SessionVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    class OpenCommentCommand : ICommand
+    public class OpenCommentCommand : ICommand
     {
         public AdminDashboardVM VM { get; set; }
 

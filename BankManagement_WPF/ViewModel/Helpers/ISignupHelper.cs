@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-     interface ISignupHelper
+    public interface ISignupHelper
     {
         Task<string> CreateAccount(UserDetail userDetail);
     }

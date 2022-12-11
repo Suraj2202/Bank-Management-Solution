@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-     interface IUpdateDetailHelper
+    public interface IUpdateDetailHelper
     {
         Task<string> UpdateLoanStatus(int loanId, string statusValue);
         Task<string> UpdateUserDetail(string username, UserDetail userDetail);

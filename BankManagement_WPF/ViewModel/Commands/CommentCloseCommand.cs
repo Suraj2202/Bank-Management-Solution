@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    class CommentCloseCommand : ICommand
+    public class CommentCloseCommand : ICommand
     {
         public CommentVM VM { get; set; }
 

@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace BankManagement_WPF.ViewModel.Commands
 {
-    class CreateAccountCommand : ICommand
+    public class CreateAccountCommand : ICommand
     {
         public SignupVM VM { get; set; }
         public CreateAccountCommand(SignupVM vm)

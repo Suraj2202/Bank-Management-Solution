@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BankManagement_WPF.ViewModel.Helpers
 {
-    interface IPreviousAppliedLoansHelper
+    public interface IPreviousAppliedLoansHelper
     {
          Task<IEnumerable<LoanDetail>> GetAdminLoanDetail();
          Task<IEnumerable<LoanDetail>> GetUserLoanDetail(string userName);
