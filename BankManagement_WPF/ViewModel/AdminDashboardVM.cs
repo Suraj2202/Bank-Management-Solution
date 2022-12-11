@@ -31,6 +31,28 @@ namespace BankManagement_WPF.ViewModel
             }
         }
 
+        public IEnumerable<LoanDetail> originalList { get; set; }
+
+        private string search;
+
+        public string Search
+        {
+            get { return search; }
+            set 
+            {
+                search = value; 
+                if(search!=null)
+                {
+                    IEnumerable<LoanDetail> filteredList = originalList?.Where(x => x.Status.ToLower().Contains(search.ToLower()));
+                    LoanDetails.Clear();
+                    LoanDetails.AddRange(filteredList);
+                    loanDetails.Refresh();
+                }
+                OnPropertyChanged("Search");
+            }
+        }
+
+
         public OpenCommentCommand OpenCommentCommand { get; set; }
         public ApprovedStatusCommand ApprovedStatusCommand { get; set; }
         public RejectCommand RejectCommands { get; set; }
@@ -63,13 +85,14 @@ namespace BankManagement_WPF.ViewModel
         {
             IPreviousAppliedLoansHelper previousAppliedLoans = new PreviousAppliedLoansHelper();
             var response = await previousAppliedLoans.GetAdminLoanDetail();
-            LoanDetails = new BindableCollection<LoanDetail>(response);
+            originalList = response;
+            LoanDetails = new BindableCollection<LoanDetail>(originalList);
         }
 
         public async void ApproveCommand()
         {
-            int pos = GlobalVariables.LOANID > 1000 ? GlobalVariables.LOANID-1001: GlobalVariables.LOANID - 1;
-            string checkValue = LoanDetails[pos].Status;
+            Search = "";
+            string checkValue = LoanDetails.FirstOrDefault(x => x.LoanId == GlobalVariables.LOANID).Status;
             if (checkValue != "Pending")
             {
                 System.Windows.MessageBox.Show("Can't Change the Status");
@@ -84,8 +107,8 @@ namespace BankManagement_WPF.ViewModel
 
         public async void RejectCommand()
         {
-            int pos = GlobalVariables.LOANID > 1000 ? GlobalVariables.LOANID - 1001 : GlobalVariables.LOANID - 1;
-            string checkValue = LoanDetails[pos].Status;
+            Search = "";
+            string checkValue = LoanDetails.FirstOrDefault(x => x.LoanId == GlobalVariables.LOANID).Status;
             if (checkValue != "Pending")
             {
                 System.Windows.MessageBox.Show("Can't Change the Status");

@@ -98,6 +98,15 @@ namespace WPF.Tests
             Assert.IsNotNull(adminDashboardVM.LoanDetails);
         }
 
-
+        [Test]
+        public void Search_Test()
+        {
+            List<LoanDetail> loanList = new List<LoanDetail>();
+            loanList.Add(TestData.LoanDetail);
+            adminDashboardVM.originalList = loanList;
+            adminDashboardVM.LoanDetails = new BindableCollection<LoanDetail>(adminDashboardVM.originalList);
+            adminDashboardVM.Search = "P";
+            Assert.AreEqual(adminDashboardVM.originalList.Count(),adminDashboardVM.LoanDetails.Count);
+        }
     }
 }
