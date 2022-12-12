@@ -16,7 +16,6 @@ namespace BankManagement_WPF.ViewModel
 {
     public class LoginSecurityVM : INotifyPropertyChanged, INotifyDataErrorInfo
     {
-        //private readonly Dictionary<string, List<string>> propertyErrors;
         private Dictionary<string, string> propertyErrors;
         TextBlockValidation textBlockValidation;
 
@@ -54,12 +53,7 @@ namespace BankManagement_WPF.ViewModel
                 passWord = value;
                 OnPropertyChanged("PassWord");
                 
-                ClearErrors(nameof(PassWord));
-                bool res = textBlockValidation.PasswordValidation(value);
-                if (res)
-                    AddError(nameof(PassWord), "Password must be inbetween 8-20 and must have 1 Caps, 1 Small and 1 Special character");
-
-
+                ClearErrors(nameof(PassWord));                
             }
         }
 
@@ -115,7 +109,7 @@ namespace BankManagement_WPF.ViewModel
                 }
                 else
                 {
-                    Warning = "Something Went Wrong !!!";
+                    Warning = "Credentials Didn't Match !!!";
                 }
             }
             catch(Exception)

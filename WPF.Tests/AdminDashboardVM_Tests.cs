@@ -54,21 +54,6 @@ namespace WPF.Tests
             Assert.IsNotNull(adminDashboardVM.LoanDetails);
         }
 
-        /*[Test]
-        [Ignore("Show Box")]
-        public void ApproveCommand_Fail_Test()
-        {
-            adminDashboardVM.LoanDetails = null;
-            List<LoanDetail> loanList = new List<LoanDetail>();
-            loanList.Add(new LoanDetail() { LoanId = 1, Status = "APPROVED" });
-            adminDashboardVM.LoanDetails = new BindableCollection<LoanDetail>(loanList);
-
-            GlobalVariables.LOANID = 1;
-            adminDashboardVM.ApproveCommand();
-
-            Assert.IsNotNull(adminDashboardVM.LoanDetails);
-        }
-*/
         [Test]
         public void RejectCommand_Test()
         {
@@ -83,21 +68,7 @@ namespace WPF.Tests
 
             Assert.IsNotNull(adminDashboardVM.LoanDetails);
         }
-/*
-        [Test]
-        [Ignore("Show Box")]
-        public void RejectCommand_Fail_Test()
-        {
-            adminDashboardVM.LoanDetails = null;
-            List<LoanDetail> loanList = new List<LoanDetail>();
-            loanList.Add(new LoanDetail() { LoanId = 1, Status = "APPROVED" });
-            adminDashboardVM.LoanDetails = new BindableCollection<LoanDetail>(loanList);
 
-            GlobalVariables.LOANID = 1;
-            adminDashboardVM.RejectCommand();
-            Assert.IsNotNull(adminDashboardVM.LoanDetails);
-        }
-*/
         [Test]
         public void Search_Test()
         {
